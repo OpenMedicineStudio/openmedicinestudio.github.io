@@ -748,6 +748,286 @@
 
   .begin-cta:hover { background: rgba(42,138,150,0.07); }
 
+  /* PROCESS SEQUENCE */
+  .process-seq {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0.5rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255,255,255,0.3);
+    border: 1px solid rgba(46,49,48,0.07);
+    border-radius: 8px;
+  }
+
+  .process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    flex: 1;
+  }
+
+  .process-num {
+    font-family: var(--serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .process-label {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .process-connector {
+    height: 1px;
+    flex: 0.5;
+    background: rgba(46,49,48,0.12);
+    margin-bottom: 1.2rem;
+  }
+
+  /* FOR / NOT FOR GRID */
+  .for-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(46,49,48,0.08);
+    border: 1px solid rgba(46,49,48,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1.75rem;
+  }
+
+  .for-col {
+    background: var(--bg);
+    padding: 1.75rem 2rem;
+  }
+
+  .for-col:last-child { background: var(--bg3); }
+
+  .for-col-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .for-col-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .for-col-dot.teal { background: var(--accent); }
+  .for-col-dot.muted { background: rgba(46,49,48,0.25); }
+
+  .for-col-title {
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .for-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .for-list li {
+    padding: 0.6rem 0;
+    border-top: 1px solid rgba(46,49,48,0.07);
+    font-size: 0.88rem;
+    color: rgba(46,49,48,0.65);
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    line-height: 1.5;
+  }
+
+  .for-list li::before {
+    content: '—';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+  }
+
+  .for-list.muted li::before { color: rgba(46,49,48,0.25); }
+
+  /* SAFETY STRIP */
+  .safety-strip {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(46,49,48,0.08);
+  }
+
+  .safety-strip span {
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .safety-divider {
+    color: rgba(46,49,48,0.2) !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* MONITORING DIAGRAM */
+  .monitor-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-top: 2.5rem;
+    padding: 2rem 2.5rem;
+    background: rgba(255,255,255,0.3);
+    border: 1px solid rgba(46,49,48,0.07);
+    border-radius: 8px;
+  }
+
+  .monitor-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .monitor-box {
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(46,49,48,0.7);
+    border: 1px solid rgba(46,49,48,0.15);
+    border-radius: 6px;
+    padding: 0.65rem 1.5rem;
+    background: rgba(247,244,240,0.6);
+    white-space: nowrap;
+  }
+
+  .monitor-box.accent {
+    color: var(--accent);
+    border-color: rgba(42,138,150,0.3);
+    background: rgba(42,138,150,0.05);
+  }
+
+  .monitor-detail {
+    font-size: 0.75rem;
+    color: rgba(46,49,48,0.45);
+    text-align: center;
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  .monitor-arrow {
+    font-size: 1.2rem;
+    color: rgba(46,49,48,0.2);
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    margin: 3rem 0 0;
+    padding: 2rem 0 1rem;
+  }
+
+  .timeline-track {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 1px;
+    background: rgba(46,49,48,0.15);
+  }
+
+  .timeline-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+
+  .timeline-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(46,49,48,0.2);
+    background: var(--bg);
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.3s;
+  }
+
+  .timeline-dot.teal {
+    border-color: var(--accent);
+    background: var(--bg);
+    box-shadow: 0 0 0 4px rgba(42,138,150,0.1);
+  }
+
+  .timeline-dot.teal::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .timeline-label {
+    margin-top: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0 0.5rem;
+  }
+
+  .timeline-day {
+    font-family: var(--serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .timeline-title {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .timeline-note {
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-family: var(--serif);
+    letter-spacing: 0.04em;
+    margin-top: 0.2rem;
+  }
+
   /* FAQ */
   .faq-list { display: flex; flex-direction: column; gap: 0; }
 
@@ -1026,6 +1306,24 @@
         <div class="phase">Re-entry &amp;<br>expansion</div>
       </div>
     </div>
+
+    <!-- Monitoring Architecture Diagram -->
+    <div class="monitor-diagram">
+      <div class="monitor-col">
+        <div class="monitor-box">Wearables</div>
+        <p class="monitor-detail">EmbracePlus · Dexcom Stelo<br>Ketone meter · Blood pressure cuff</p>
+      </div>
+      <div class="monitor-arrow">→</div>
+      <div class="monitor-col">
+        <div class="monitor-box">Secure Database</div>
+        <p class="monitor-detail">Canadian-hosted · Encrypted<br>Continuous data stream</p>
+      </div>
+      <div class="monitor-arrow">→</div>
+      <div class="monitor-col">
+        <div class="monitor-box accent">Physician</div>
+        <p class="monitor-detail">Daily review · Real-time alerts<br>Signal-detection algorithm</p>
+      </div>
+    </div>
   </div>
 </section>
 </div>
@@ -1036,7 +1334,52 @@
   <div class="section-inner wide">
     <span class="section-descriptor">Five days, mapped</span>
     <h2 class="title-display">The Journey</h2>
-    <div class="days-grid">
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <div class="timeline-track">
+        <div class="timeline-line"></div>
+        <div class="timeline-node" data-active="false">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">
+            <span class="timeline-day">Day 1</span>
+            <span class="timeline-title">Arrival</span>
+          </div>
+        </div>
+        <div class="timeline-node" data-active="false">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">
+            <span class="timeline-day">Day 2</span>
+            <span class="timeline-title">The body shifts</span>
+          </div>
+        </div>
+        <div class="timeline-node" data-active="true">
+          <div class="timeline-dot teal"></div>
+          <div class="timeline-label">
+            <span class="timeline-day" style="color:var(--accent);">Day 3</span>
+            <span class="timeline-title" style="color:var(--accent);">The window opens</span>
+            <span class="timeline-note">Autonomic Transition Window</span>
+          </div>
+        </div>
+        <div class="timeline-node" data-active="false">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">
+            <span class="timeline-day">Days 4–5</span>
+            <span class="timeline-title">Deep regulation</span>
+          </div>
+        </div>
+        <div class="timeline-node" data-active="false">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">
+            <span class="timeline-day">Day 6+</span>
+            <span class="timeline-title">Re-entry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail cards below -->
+    <div class="days-grid" style="margin-top: 3rem;">
       <div class="day-block accent-left">
         <span class="day-num">Days 1–2</span>
         <h4>The body shifts</h4>
@@ -1068,7 +1411,7 @@
   <div class="section-inner wide">
     <span class="section-descriptor">Remote, monitored, supervised by me</span>
     <h2 class="section-title" style="margin-bottom: 2.5rem;">How It Works</h2>
-    <div class="how-grid">
+    <div class="how-grid" style="grid-template-columns: 1fr 1fr 1fr;">
       <div class="how-card" onclick="toggleHow(this)">
         <div class="how-header">
           <div class="how-header-left">
@@ -1078,7 +1421,7 @@
           <span class="how-arrow">+</span>
         </div>
         <div class="how-body">
-          <p>Your monitoring devices arrive by courier before the fast begins — an EmbracePlus wristband, a Dexcom Stelo continuous glucose monitor, a blood ketone meter, and a blood pressure cuff. Setup takes about fifteen minutes, and I'm available to help if anything needs troubleshooting.</p>
+          <p>Your monitoring devices arrive by courier before the fast begins — an EmbracePlus wristband, a Dexcom continuous glucose monitor, a blood ketone meter, and a blood pressure cuff. Setup takes about fifteen minutes. I'm available to help if anything needs troubleshooting.</p>
         </div>
       </div>
       <div class="how-card" onclick="toggleHow(this)">
@@ -1090,31 +1433,19 @@
           <span class="how-arrow">+</span>
         </div>
         <div class="how-body">
-          <p>Water only. Black coffee, tea, and any prescribed medications are reviewed individually at intake. Electrolyte supplementation is used when clinically indicated. Nothing is left to guesswork — everything is confirmed in advance.</p>
+          <p>Water only for five days. Your devices stream data to me continuously — I review it each day and am available for clinical questions throughout. Nothing is left to guesswork. If something needs attention, I'm already reading it before you call.</p>
         </div>
       </div>
       <div class="how-card" onclick="toggleHow(this)">
         <div class="how-header">
           <div class="how-header-left">
             <span class="how-num">03</span>
-            <h4>The watch</h4>
+            <h4>Refeeding</h4>
           </div>
           <span class="how-arrow">+</span>
         </div>
         <div class="how-body">
-          <p>Your devices stream data continuously throughout the week. I review it each day and am available for clinical questions at any point. The week works best with a quiet rhythm — rest, gentle movement, time outdoors, minimal demands from work or screens.</p>
-        </div>
-      </div>
-      <div class="how-card" onclick="toggleHow(this)">
-        <div class="how-header">
-          <div class="how-header-left">
-            <span class="how-num">04</span>
-            <h4>The close</h4>
-          </div>
-          <span class="how-arrow">+</span>
-        </div>
-        <div class="how-body">
-          <p>Refeeding begins on day six with a carefully sequenced protocol. Once you're through it, we meet to look together at what the data captured and what you experienced. That conversation is part of the work.</p>
+          <p>From day six, a carefully sequenced return to eating. Once you're through it, we meet to look at what the data captured and what you experienced. That conversation is part of the work.</p>
         </div>
       </div>
     </div>
@@ -1154,19 +1485,46 @@
       <div class="split-body">
         <p class="body-intro">A real clinical intervention — screening matters</p>
         <div class="divider"></div>
-        <p>A medically supervised water fast is a genuine clinical intervention, and I screen carefully. The work is most safely offered to people who arrive in a stable enough place to undertake it — physically healthy, able to clear five quiet days, and not currently managing conditions that would make fasting unsafe.</p>
-        <p>The week works best when your calendar has real space in it — no demanding work commitments, no travel, no significant obligations. That's not about comfort; it's about giving your system the conditions it needs to do what you're asking it to do.</p>
-        <p>All participants remain under the care of their own family physician throughout. My role is to supervise the fast specifically — I work alongside your primary medical care, not instead of it.</p>
-        <p>I screen carefully for the following, and will discuss anything that applies at intake:</p>
-        <ul class="eligibility-list">
-          <li>Pregnancy or breastfeeding</li>
-          <li>Type 1 diabetes or other insulin-dependent conditions</li>
-          <li>Medications that require food</li>
-          <li>Current or recent eating disorders</li>
-          <li>Significant cardiac, renal, hepatic, or psychiatric conditions</li>
-          <li>Acute crisis of any kind</li>
-        </ul>
-        <p style="margin-top: 1.5rem;">Contraindications are reviewed individually at intake. I hold the authority to recommend modification or postponement at any point in the process, and I use it when it's needed.</p>
+        <p>A medically supervised water fast is a genuine clinical intervention, and I screen carefully. The work is most safely offered to people who arrive in a stable enough place to undertake it.</p>
+
+        <div class="for-grid">
+          <div class="for-col">
+            <div class="for-col-header">
+              <span class="for-col-dot teal"></span>
+              <span class="for-col-title">This is for you if</span>
+            </div>
+            <ul class="for-list">
+              <li>You are physically healthy and stable</li>
+              <li>You can give five quiet days to the process</li>
+              <li>Your calendar has real space — no travel, no heavy commitments</li>
+              <li>You remain under the care of your own family physician</li>
+              <li>You are ready to rest, not perform</li>
+            </ul>
+          </div>
+          <div class="for-col">
+            <div class="for-col-header">
+              <span class="for-col-dot muted"></span>
+              <span class="for-col-title">Requires careful screening if</span>
+            </div>
+            <ul class="for-list muted">
+              <li>Pregnancy or breastfeeding</li>
+              <li>Type 1 diabetes or insulin-dependent conditions</li>
+              <li>Medications that require food</li>
+              <li>Current or recent eating disorders</li>
+              <li>Significant cardiac, renal, hepatic, or psychiatric conditions</li>
+              <li>Acute crisis of any kind</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Safety strip -->
+        <div class="safety-strip">
+          <span>Physician-supervised throughout</span>
+          <span class="safety-divider">·</span>
+          <span>Stop at any point</span>
+          <span class="safety-divider">·</span>
+          <span>Your family doctor stays involved</span>
+        </div>
       </div>
     </div>
   </div>
