@@ -1,1000 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Open Medicine Studio</title>
-<link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f7f4f0;
-    --bg2: #eeebe6;
-    --bg3: #f2efe9;
-    --text: #2e3130;
-    --muted: #8a8880;
-    --accent: #2a8a96;
-    --accent-light: #2fa3b2;
-    --accent-dim: rgba(42,138,150,0.08);
-    --border: rgba(46,49,48,0.08);
-    --serif: 'Clash Grotesk', sans-serif;
-    --body: 'DM Sans', sans-serif;
-  }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; background: var(--bg); }
-
-  body {
-    background: transparent;
-    color: var(--text);
-    font-family: var(--body);
-    font-size: 17px;
-    line-height: 1.8;
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    padding-bottom: 4rem;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background-color: var(--bg);
-    background-image:
-      radial-gradient(ellipse 120% 50% at 0% 0%, rgba(42,138,150,0.14) 0%, transparent 60%),
-      radial-gradient(ellipse 80% 70% at 100% 15%, rgba(175,150,220,0.11) 0%, transparent 55%),
-      radial-gradient(ellipse 90% 60% at 15% 85%, rgba(42,138,150,0.1) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 50% at 85% 88%, rgba(205,180,235,0.1) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200,228,232,0.07) 0%, transparent 65%);
-  }
-
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 4rem;
-    background: rgba(247,244,240,0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-  }
-
-  .nav-wordmark {
-    font-family: var(--serif);
-    font-size: 0.85rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  .nav-cta {
-    font-family: var(--serif);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    border: 1px solid rgba(42,138,150,0.25);
-    padding: 0.6rem 1.6rem;
-    transition: background 0.2s;
-  }
-  .nav-cta:hover { background: var(--accent-dim); }
-
-  section {
-    position: relative;
-    padding: 7rem 5rem;
-    border: 1px solid rgba(46,49,48,0.15);
-    border-radius: 16px;
-    background: rgba(247,244,240,0.55);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    margin: 1.5rem 2rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  section.visible { opacity: 1; transform: translateY(0); }
-
-  section.gradient {
-    overflow: hidden;
-    background: rgba(247,244,240,0.55);
-    border: 1px solid rgba(46,49,48,0.15);
-    border-radius: 16px;
-  }
-
-  section.gradient::before { display: none; }
-  section.gradient > * { position: relative; z-index: 1; }
-  section.alt { background: rgba(238,235,230,0.5); }
-
-  section#hero {
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    opacity: 1;
-    transform: none;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 4rem 7rem;
-  }
-
-  /* HEADING HIERARCHY — small descriptor on top, big title below */
-  .section-descriptor {
-    font-family: var(--serif);
-    font-size: 0.68rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .section-descriptor.on-gradient { color: rgba(46,49,48,0.45); }
-
-  .section-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    font-size: clamp(2.2rem, 4vw, 3.8rem);
-    margin-bottom: 2.5rem;
-  }
-
-  .section-title.on-gradient { color: rgba(46,49,48,0.88); }
-
-  /* Hero title — full bleed */
-  .hero-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    line-height: 0.93;
-    letter-spacing: -0.025em;
-    color: var(--text);
-    font-size: clamp(4.5rem, 11vw, 11rem);
-    margin-bottom: 0;
-  }
-
-  /* Section titles that go big and full-width */
-  .title-display {
-    font-family: var(--serif);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    color: var(--text);
-    font-size: clamp(2.8rem, 6.5vw, 7rem);
-    margin-bottom: 3.5rem;
-  }
-
-  .section-inner { max-width: 760px; margin: 0 auto; }
-  .section-inner.wide { max-width: 1080px; }
-
-  .split-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7rem;
-    align-items: start;
-  }
-
-  .split-left {
-    position: sticky;
-    top: 8rem;
-  }
-
-  .split-body { padding-top: 0.25rem; }
-
-  .body-intro {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
-    line-height: 1.5;
-  }
-
-  .body-intro.on-gradient { color: rgba(46,49,48,0.45); }
-
-  p {
-    color: rgba(46,49,48,0.65);
-    margin-bottom: 1.35rem;
-    max-width: 56ch;
-    line-height: 1.8;
-  }
-  p:last-child { margin-bottom: 0; }
-  p strong { color: var(--text); font-weight: 400; }
-  p em { font-style: italic; color: rgba(46,49,48,0.82); }
-
-  .hero-sub {
-    font-size: 1.1rem;
-    color: rgba(46,49,48,0.52);
-    max-width: 46ch;
-    line-height: 1.75;
-    margin-top: 0;
-  }
-
-  .divider {
-    width: 32px;
-    height: 1px;
-    background: rgba(42,138,150,0.4);
-    margin: 2rem 0;
-  }
-
-  section.alt { background: var(--bg2); }
-
-  .days-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .day-block {
-    background: rgba(247,244,240,0.6);
-    padding: 2.25rem;
-  }
-
-  .day-block.alt-bg { background: rgba(238,235,230,0.5); }
-  .day-block.accent-left { border-left: 2px solid rgba(42,138,150,0.4); }
-
-  .day-num {
-    font-family: var(--serif);
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.85rem;
-    display: block;
-  }
-
-  .day-block h4 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 1.1rem;
-    color: var(--text);
-    margin-bottom: 0.65rem;
-    letter-spacing: -0.01em;
-  }
-
-  .day-block p { font-size: 0.88rem; margin-bottom: 0; }
-
-  .chart-wrap {
-    margin-top: 4rem;
-    background: rgba(255,255,255,0.5);
-    border: 1px solid rgba(46,49,48,0.07);
-    padding: 2.5rem 2.5rem 2rem;
-  }
-
-  .chart-label {
-    font-family: var(--serif);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(46,49,48,0.38);
-    margin-bottom: 0.3rem;
-  }
-
-  .chart-sub { font-size: 0.8rem; color: rgba(46,49,48,0.38); margin-bottom: 1.75rem; }
-
-  #aporia-chart { width: 100%; height: 200px; display: block; }
-
-  .phase-strip {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    margin-top: 0.75rem;
-    border-top: 1px solid rgba(46,49,48,0.07);
-  }
-
-  .phase {
-    padding: 0.75rem 0.5rem 0.5rem;
-    border-right: 1px solid rgba(46,49,48,0.07);
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(46,49,48,0.32);
-    font-family: var(--serif);
-    line-height: 1.3;
-  }
-
-  .phase:last-child { border-right: none; }
-  .phase.window { color: var(--accent); }
-
-  .steps { margin-top: 2.5rem; }
-
-  .step {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    border-top: 1px solid var(--border);
-    padding: 1.75rem 0;
-  }
-
-  .step-num {
-    font-family: var(--serif);
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    padding-top: 0.15rem;
-  }
-
-  .step-content h4 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 1rem;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .step-content p { font-size: 0.9rem; }
-
-  .doctor-grid {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 4.5rem;
-    align-items: start;
-  }
-
-  .doctor-photo {
-    width: 100%;
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    object-position: center top;
-    filter: grayscale(8%) contrast(1.04);
-    display: block;
-  }
-
-  .doctor-photo-placeholder {
-    width: 100%;
-    aspect-ratio: 4/5;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 0.75rem;
-    font-family: var(--serif);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .benefit-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    margin-top: 2.5rem;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .benefit-item {
-    background: rgba(247,244,240,0.6);
-    padding: 1.75rem;
-  }
-
-  .benefit-item.alt-bg { background: rgba(238,235,230,0.5); }
-
-  .benefit-item h4 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 0.9rem;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.01em;
-  }
-
-  .benefit-item p { font-size: 0.84rem; margin-bottom: 0; }
-
-  .eligibility-list { list-style: none; margin-top: 1.5rem; }
-
-  .eligibility-list li {
-    padding: 0.8rem 0;
-    border-top: 1px solid var(--border);
-    font-size: 0.9rem;
-    color: rgba(46,49,48,0.62);
-    display: flex;
-    gap: 1rem;
-    align-items: baseline;
-  }
-
-  .eligibility-list li::before {
-    content: '—';
-    color: var(--accent);
-    flex-shrink: 0;
-    font-size: 0.72rem;
-  }
-
-  .booking-block {
-    background: rgba(255,255,255,0.55);
-    border: 1px solid rgba(46,49,48,0.08);
-    border-left: 2px solid rgba(42,138,150,0.4);
-    padding: 3rem 3.5rem;
-    margin-top: 3rem;
-  }
-
-  .booking-steps { display: flex; flex-direction: column; gap: 1.75rem; margin-bottom: 2.5rem; }
-
-  .booking-step {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .booking-step-num {
-    font-family: var(--serif);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    padding-top: 0.1rem;
-  }
-
-  .booking-step p { font-size: 0.9rem; margin-bottom: 0; }
-  .booking-step a { color: var(--accent); text-decoration: none; }
-  .booking-step a:hover { text-decoration: underline; }
-
-  .price-line {
-    border-top: 1px solid rgba(46,49,48,0.08);
-    padding-top: 2rem;
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-  }
-
-  .price-num {
-    font-family: var(--serif);
-    font-size: 2.8rem;
-    color: var(--text);
-    letter-spacing: -0.025em;
-  }
-
-  .price-label { font-size: 0.82rem; color: var(--muted); }
-
-  .cta-button {
-    display: inline-block;
-    margin-top: 2.5rem;
-    font-family: var(--serif);
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    border: 1px solid rgba(42,138,150,0.3);
-    padding: 1rem 2.5rem;
-    transition: background 0.2s;
-  }
-  .cta-button:hover { background: rgba(42,138,150,0.07); }
-
-  footer {
-    padding: 3rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid rgba(46,49,48,0.15);
-    border-radius: 16px;
-    background: rgba(247,244,240,0.55);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    margin: 1.5rem 2rem 0;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  footer.visible { opacity: 1; transform: none; }
-
-  .footer-links { display: flex; gap: 2.5rem; }
-  .footer-links a {
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    font-family: var(--serif);
-    text-transform: uppercase;
-  }
-  .footer-links a:hover { color: var(--text); }
-  .footer-copy { font-size: 0.75rem; color: var(--muted); }
-
-  @media (max-width: 960px) {
-    nav { padding: 1.25rem 2rem; }
-    section { padding: 5rem 2rem; margin: 1rem 1rem; }
-    .hero-content { padding: 0 2rem 5rem; }
-    .split-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .split-left { position: static; }
-    .section-title { font-size: clamp(2rem, 7vw, 3.2rem); }
-    .days-grid { grid-template-columns: 1fr; }
-    .doctor-grid { grid-template-columns: 1fr; }
-    .benefit-cols { grid-template-columns: 1fr; }
-    .phase-strip { grid-template-columns: repeat(4, 1fr); }
-    .phase:nth-child(4) { border-right: none; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; margin: 1rem 1rem 0; }
-    .booking-block { padding: 2rem; }
-    .hero-title { font-size: clamp(3.5rem, 13vw, 7rem); }
-    .title-display { font-size: clamp(2.5rem, 10vw, 5rem); }
-  }
-
-  @media (max-width: 600px) {
-    .phase-strip { grid-template-columns: repeat(2, 1fr); }
-    .hero-title { font-size: clamp(3rem, 15vw, 5rem); }
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <a href="#hero" class="nav-logo">
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="Open Medicine Studio">
-      <circle cx="16" cy="16" r="14" stroke="#2a8a96" stroke-width="1"/>
-      <circle cx="16" cy="16" r="2.2" fill="#2a8a96"/>
-    </svg>
-    <span class="nav-wordmark">Open Medicine Studio</span>
-  </a>
-  <a href="#begin" class="nav-cta">Begin</a>
-</nav>
-
-<!-- 01 HERO -->
-<section id="hero" class="gradient">
-  <div class="hero-content">
-    <span class="section-descriptor on-gradient">A medically supervised clinical service</span>
-    <h1 class="hero-title">Access the<br>benefits of<br>water fasting.</h1>
-    <div class="divider" style="margin-top: 3.5rem;"></div>
-    <p class="hero-sub">Five days. At home. Under continuous physician oversight and research-grade monitoring. Conducted by a physician who has spent years understanding what this process can do.</p>
-  </div>
-</section>
-
-<!-- 01b THE STORY -->
-<section id="the-story">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">The moment that started everything</span>
-        <h2 class="section-title">Forty Days on the Atlantic</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Why I built this, and where it began</p>
-        <div class="divider"></div>
-        <p>In 2008 I was the ship's doctor on a forty-day Atlantic crossing. Three men in crisis boarded that boat. By the time we made landfall, something had shifted in each of them — something I couldn't account for with the medicine I'd been trained in.</p>
-        <p>I've spent the years since trying to understand what I witnessed. Open Medicine Studio is what I built when I finally did — a clinical service designed to create those conditions carefully, with good data underneath them, and a physician present throughout.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 02 ABOUT THE STUDIO -->
-<section id="about">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">What I built, and why</span>
-        <h2 class="section-title">About the Studio</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">A working studio, built in clinical register</p>
-        <div class="divider"></div>
-        <p>I built Open Medicine Studio because I needed a place where this work could be done carefully and taken seriously — not flattened into wellness, and not pushed into a clinical category that didn't quite fit.</p>
-        <p>The work centres on one thing: creating the conditions under which a human nervous system can briefly soften its defences, expand its range, and return to ordinary life with more capacity than it had before. The way I do that is through a medically supervised water fast, conducted at home, with continuous remote monitoring and daily physician oversight from me personally.</p>
-        <p>The supervision is close. The monitoring is research-grade. And the pace of the work is set by what your body is actually doing — not by a schedule.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 03 WATER FASTING -->
-<section id="what-is-fasting" class="alt">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">A clinically established intervention</span>
-        <h2 class="section-title">Water Fasting</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Decades of medical research, taken seriously</p>
-        <div class="divider"></div>
-        <p>Therapeutic fasting under medical supervision has been studied since the 1960s. Its effects on metabolism, autonomic regulation, inflammation, and the central nervous system are well-documented in the published literature. This is an established area of medicine, not a fringe practice.</p>
-        <p>What I bring to it is continuous remote monitoring at a resolution that hasn't previously been available in home-based fasting — paired with daily physician review throughout the week. The physiological basis of fasting is well understood. What I've added is a way to watch it unfold in real time, and to be genuinely present if something needs attention.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 PHYSICAL BENEFITS -->
-<section id="benefits-physical">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">What happens in the body</span>
-        <h2 class="section-title">Physical Benefits</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Clinical outcomes with real evidence behind them</p>
-        <div class="divider"></div>
-        <p>Across five days of supervised fasting, the body moves through a documented sequence of physiological transitions. Insulin falls. Stored glycogen depletes. The body shifts from glucose to ketone metabolism. Cellular autophagy accelerates. Inflammatory markers decrease.</p>
-        <div class="benefit-cols">
-          <div class="benefit-item">
-            <h4>Blood pressure</h4>
-            <p>Documented reductions across medically supervised fasting research spanning decades of peer-reviewed literature.</p>
-          </div>
-          <div class="benefit-item alt-bg">
-            <h4>Insulin sensitivity</h4>
-            <p>Meaningful improvements in insulin sensitivity and blood-sugar regulation, tracked in real time through continuous glucose monitoring.</p>
-          </div>
-          <div class="benefit-item alt-bg">
-            <h4>Inflammation</h4>
-            <p>Decreases in hepatic fat and measurable shifts in inflammatory markers, characterised across the published literature on supervised fasting.</p>
-          </div>
-          <div class="benefit-item">
-            <h4>Cellular autophagy</h4>
-            <p>Accelerated cellular renewal as the metabolic shift into ketosis creates conditions for deeper cellular housekeeping.</p>
-          </div>
-        </div>
-        <p style="margin-top: 1.75rem;">I follow all of these through your continuous data stream throughout the week.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 05 MENTAL BENEFITS -->
-<section id="benefits-mental" class="alt">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">What happens in the mind</span>
-        <h2 class="section-title">Mental and Emotional Benefits</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Clarity, and a wider internal range</p>
-        <div class="divider"></div>
-        <p>When the regular structure of meals is removed — along with the work, the screens, and the stimulation that normally fills the gaps — people tend to meet what daily life has been keeping at a distance. Sometimes that's clarity. Sometimes it's older material: boredom, restlessness, grief that hasn't had room to surface.</p>
-        <p>What develops across the week has a name in the clinical literature: autonomic range. A wider band within which you can meet what life brings and remain regulated. People who've done this kind of work — in many forms, across many cultures, for a very long time — often describe coming back with more room than they left with. That's what I'm trying to support, carefully and with good data underneath it.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 06 GOLDEN WINDOW -->
-<section id="golden-window" class="gradient">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor on-gradient">A measurable physiological shift</span>
-        <h2 class="section-title on-gradient">The Autonomic Transition Window</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro on-gradient">Watched for in real time, around day three</p>
-        <div class="divider"></div>
-        <p>Around day three of a five-day fast — as the body completes its shift into ketone metabolism — the autonomic nervous system passes through a measurable transition. Sympathetic activation gives way to parasympathetic regulation. For a brief period, the patterns the system has been holding become available for revision.</p>
-        <p>I call this the Autonomic Transition Window. As far as I know, no other clinical service is currently monitoring for it. It's detectable because the studio's monitoring architecture is built specifically to detect it. Your continuous heart rate variability, electrodermal activity, glucose, and ketone levels stream from the wearables on your wrist to a secure Canadian-hosted database, where my signal-detection system reads the data as it arrives.</p>
-        <p>When the monitoring shows the window opening, my attention turns to you. What you do with that time is yours. I hold the clinical conditions that make it possible.</p>
-      </div>
-    </div>
-    <div class="chart-wrap">
-      <p class="chart-label">The Transformation Arc</p>
-      <p class="chart-sub">Aporia Score (AS) trajectory across the five-day fast and re-entry</p>
-      <canvas id="aporia-chart" aria-label="Aporia Score trajectory chart" role="img"></canvas>
-      <div class="phase-strip">
-        <div class="phase">Arrival &amp;<br>intake</div>
-        <div class="phase">Shift begins</div>
-        <div class="phase">Ketosis entry</div>
-        <div class="phase window">Autonomic<br>window</div>
-        <div class="phase">Deep<br>regulation</div>
-        <div class="phase">Parasym-<br>pathetic</div>
-        <div class="phase">Refeeding</div>
-        <div class="phase">Re-entry &amp;<br>expansion</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 07 THE JOURNEY -->
-<section id="journey">
-  <div class="section-inner wide">
-    <span class="section-descriptor">Five days, mapped</span>
-    <h2 class="title-display">The Journey</h2>
-    <div class="days-grid">
-      <div class="day-block accent-left">
-        <span class="day-num">Days 1–2</span>
-        <h4>The body shifts</h4>
-        <p>Hunger arrives and passes. Energy drops, then settles. The system moves into ketone metabolism. Sympathetic activation rises as the body works through the metabolic transition — this is normal, expected, and closely watched.</p>
-      </div>
-      <div class="day-block alt-bg">
-        <span class="day-num">Day 3</span>
-        <h4>The window opens</h4>
-        <p>The Autonomic Transition Window opens. The defended configurations the system has been holding soften briefly. My monitoring registers it. What happens in that time belongs to you.</p>
-      </div>
-      <div class="day-block alt-bg">
-        <span class="day-num">Days 4–5</span>
-        <h4>Deep regulation</h4>
-        <p>The system settles into parasympathetic dominance. Clarity arrives. A wider range of internal states becomes accessible. Many people describe these days as genuinely restful in a way they haven't experienced in years.</p>
-      </div>
-      <div class="day-block">
-        <span class="day-num">Re-entry</span>
-        <h4>Returning with more room</h4>
-        <p>Carefully sequenced refeeding over the following days. A structured review with me once you're through it. You return to your ordinary life with a measurably expanded tolerance range and a full record of what your system did during the week.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 08 HOW IT WORKS -->
-<section id="how-it-works" class="alt">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">Remote, monitored, supervised by me</span>
-        <h2 class="section-title">How It Works</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">The practical shape of the five days</p>
-        <div class="divider"></div>
-        <p>The fast takes place at home, in your own environment, on your own schedule. Everything is designed to be as simple to manage as possible on your end — the monitoring runs in the background, and I do the watching.</p>
-        <div class="steps">
-          <div class="step">
-            <span class="step-num">Kit</span>
-            <div class="step-content">
-              <h4>Your monitoring devices arrive by courier</h4>
-              <p>An EmbracePlus wristband, a Dexcom Stelo continuous glucose monitor, a blood ketone meter, and a blood pressure cuff. Setup takes about fifteen minutes, and I'm available to help if anything needs troubleshooting.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-num">Fast</span>
-            <div class="step-content">
-              <h4>Water, with everything reviewed in advance</h4>
-              <p>The fast itself is water only. Black coffee, tea, and any prescribed medications are reviewed individually at intake. Electrolyte supplementation is used when clinically indicated. Nothing is left to guesswork.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-num">Watch</span>
-            <div class="step-content">
-              <h4>Continuous data, reviewed daily by me</h4>
-              <p>Your devices stream data throughout the week. I review it each day and am available for clinical questions at any point. The week works best with a quiet rhythm — rest, gentle movement, time outdoors, minimal demands from work or screens.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-num">Close</span>
-            <div class="step-content">
-              <h4>Refeeding and a review together</h4>
-              <p>Refeeding begins on day six with a carefully sequenced protocol. Once you're through it, we meet to look together at what the data captured and what you experienced. That conversation is part of the work.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 09 WHAT THE EXPERIENCE IS LIKE -->
-<section id="experience">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">Held without being managed</span>
-        <h2 class="section-title">What the Experience is Like</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">A monitored clinical experience, in the quiet of your own home</p>
-        <div class="divider"></div>
-        <p>The structure of this work is unusual. You're held without being managed. The monitoring does the reporting — your body's signals stream continuously to my dashboard, and I'm reading them. There's no need to perform wellness, to justify your experience, or to explain how you feel.</p>
-        <p>For people who have spent a long time being responsible for others, that experience — of being present in your own life while someone else watches the data — can itself be meaningful. It's part of what creates space for the deeper work. You're not alone in there. And you don't have to navigate it by yourself.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 10 IS THIS FOR YOU -->
-<section id="for-you" class="alt">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">Clinical eligibility, reviewed individually</span>
-        <h2 class="section-title">Is This For You</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">A real clinical intervention — screening matters</p>
-        <div class="divider"></div>
-        <p>A medically supervised water fast is a genuine clinical intervention, and I screen carefully. The work is most safely offered to people who arrive in a stable enough place to undertake it — physically healthy, able to clear five quiet days, and not currently managing conditions that would make fasting unsafe.</p>
-        <p>The week works best when your calendar has real space in it — no demanding work commitments, no travel, no significant obligations. That's not about comfort; it's about giving your system the conditions it needs to do what you're asking it to do.</p>
-        <p>All participants remain under the care of their own family physician throughout. My role is to supervise the fast specifically — I work alongside your primary medical care, not instead of it.</p>
-        <p>I screen carefully for the following, and will discuss anything that applies at intake:</p>
-        <ul class="eligibility-list">
-          <li>Pregnancy or breastfeeding</li>
-          <li>Type 1 diabetes or other insulin-dependent conditions</li>
-          <li>Medications that require food</li>
-          <li>Current or recent eating disorders</li>
-          <li>Significant cardiac, renal, hepatic, or psychiatric conditions</li>
-          <li>Acute crisis of any kind</li>
-        </ul>
-        <p style="margin-top: 1.5rem;">Contraindications are reviewed individually at intake. I hold the authority to recommend modification or postponement at any point in the process, and I use it when it's needed.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11 ABOUT ME -->
-<section id="about-me">
-  <div class="section-inner wide">
-    <span class="section-descriptor">The physician behind the studio</span>
-    <h2 class="title-display">About Me</h2>
-    <div class="doctor-grid">
-      <div>
-        <img src="photo.jpg" alt="Dr. Adriaan van der Wart" class="doctor-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <div class="doctor-photo-placeholder" style="display:none">Photo</div>
-      </div>
-      <div>
-        <p class="body-intro">Dr. Adriaan van der Wart, MBChB</p>
-        <div class="divider"></div>
-        <p>I'm a family and emergency physician practising in British Columbia. My medical training was completed in South Africa, and I've worked across emergency, rural, northern, Indigenous, expedition, and end-of-life medicine in Canada for over a decade.</p>
-        <p>In 2008, I joined a forty-day sailing voyage across the Atlantic as ship's doctor for three men attempting an extended fast. They were in genuine crisis when they boarded. By the time we made landfall, they had changed in ways that the medicine I'd been trained in couldn't fully account for. I didn't understand what I was seeing at the time. The work since then has been figuring it out.</p>
-        <p>Along the way I've done my own fasts, sat with silence and with plant medicines under careful guidance, climbed mountains, burned out, and come back. Open Medicine Studio is what I built when I finally understood what I'd been looking at on that boat. It's the offering I've come to believe in — grounded in clinical practice, made possible by the monitoring technology that now allows a physician to be genuinely present at a distance.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 12 HOW TO BEGIN -->
-<section id="begin" class="gradient">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor on-gradient">An invitation, walked carefully</span>
-        <h2 class="section-title on-gradient">How to Begin</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro on-gradient">The path in is intentionally gradual</p>
-        <div class="divider"></div>
-        <p>I designed the intake process to be careful on both sides. It gives me what I need to understand your situation, and it gives you what you need to decide whether this is the right thing for you right now.</p>
-        <div class="booking-block">
-          <div class="booking-steps">
-            <div class="booking-step">
-              <span class="booking-step-num">01</span>
-              <p>Reach out to Natalie Moore, my assistant, at <a href="mailto:natalie@openmedicinestudio.com">natalie@openmedicinestudio.com</a>. She'll send you a brief eligibility check — about five minutes — and answer your initial questions.</p>
-            </div>
-            <div class="booking-step">
-              <span class="booking-step-num">02</span>
-              <p>If the eligibility check is clear, the next step is a structured medical intake — about twenty-five minutes, completed through the Jane patient portal. I review everything before we meet.</p>
-            </div>
-            <div class="booking-step">
-              <span class="booking-step-num">03</span>
-              <p>We meet one-on-one. I walk through your intake, describe the likely physiological routing of your fast, and we talk through the specific support I'll provide during the week. The consultation fee is $100 CAD, invoiced afterward. If you go ahead with the fast, that amount comes off your final invoice.</p>
-            </div>
-            <div class="booking-step">
-              <span class="booking-step-num">04</span>
-              <p>If we both feel the fast is the right next step, you book. A deposit is required to hold your place. If the fast ends early — by your choice in consultation with me, or by my clinical recommendation — partial reimbursement is available, calculated against the days completed.</p>
-            </div>
-          </div>
-          <div class="price-line">
-            <span class="price-num">$2,500 CAD</span>
-            <span class="price-label">Total cost of the supervised fast</span>
-          </div>
-        </div>
-        <p style="margin-top: 2rem; font-size: 0.86rem; color: var(--muted);">From first contact to the first day of fasting is typically four to eight weeks, depending on how quickly the intake is completed and how the consultation goes. I work with a small number of participants at a time — the work requires that.</p>
-        <a href="mailto:natalie@openmedicinestudio.com" class="cta-button">Begin — natalie@openmedicinestudio.com</a>
-        <p style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--muted);">General inquiries: <a href="mailto:info@openmedicinestudio.com" style="color:var(--accent); text-decoration:none;">info@openmedicinestudio.com</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div style="display:flex; align-items:center; gap:0.75rem;">
-    <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-      <circle cx="16" cy="16" r="14" stroke="#2a8a96" stroke-width="1"/>
-      <circle cx="16" cy="16" r="2.2" fill="#2a8a96"/>
-    </svg>
-    <span style="font-family:var(--serif); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted);">Open Medicine Studio</span>
-  </div>
-  <div class="footer-links">
-    <a href="mailto:info@openmedicinestudio.com">Contact</a>
-    <a href="#begin">Begin</a>
-  </div>
-  <p class="footer-copy">© 2025 Open Medicine Studio</p>
-</footer>
-
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.06 });
-
-document.querySelectorAll('section, footer').forEach(el => observer.observe(el));
-
-function drawAporiaChart() {
-  const canvas = document.getElementById('aporia-chart');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  ctx.scale(dpr, dpr);
-  const W = rect.width, H = rect.height;
-  const points = [
-    {x:0,y:0},{x:0.1,y:0.1},{x:0.2,y:0.3},{x:0.32,y:0.65},{x:0.44,y:0.85},
-    {x:0.5,y:0},{x:0.56,y:-0.35},{x:0.65,y:-0.7},{x:0.75,y:-0.85},
-    {x:0.85,y:-0.55},{x:0.93,y:-0.2},{x:1.0,y:0.18},
-  ];
-  const padL=20,padR=70,padT=24,padB=20;
-  const chartW=W-padL-padR,chartH=H-padT-padB;
-  const midY=padT+chartH*0.42;
-  function px(p){return padL+p.x*chartW;}
-  function py(p){return midY-p.y*chartH*0.45;}
-  ctx.beginPath();ctx.setLineDash([4,5]);
-  ctx.strokeStyle='rgba(46,49,48,0.15)';ctx.lineWidth=1;
-  ctx.moveTo(padL,midY);ctx.lineTo(padL+chartW,midY);ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='rgba(46,49,48,0.3)';ctx.font='10px DM Sans,sans-serif';ctx.textAlign='left';
-  ctx.fillText('AS = 0',padL+chartW+8,midY+4);
-  ctx.fillText('baseline',padL+chartW+8,midY+16);
-  ctx.fillStyle='rgba(46,49,48,0.2)';
-  ctx.fillText('sympathetic · aporia ↑',padL+2,padT+14);
-  const windowX=px({x:0.5});
-  ctx.beginPath();ctx.setLineDash([3,4]);
-  ctx.strokeStyle='rgba(42,138,150,0.4)';ctx.lineWidth=1;
-  ctx.moveTo(windowX,padT);ctx.lineTo(windowX,padT+chartH);ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='rgba(42,138,150,0.75)';ctx.font='10px DM Sans,sans-serif';
-  ctx.fillText('Autonomic transition window',windowX+8,midY-28);
-  ctx.fillText('Day 3 · AS = 0',windowX+8,midY-16);
-  const gc=[
-    {pos:0,color:'rgba(160,145,60,0.8)'},{pos:0.44,color:'rgba(200,70,50,0.8)'},
-    {pos:0.5,color:'rgba(42,138,150,1)'},{pos:0.65,color:'rgba(100,140,210,0.85)'},
-    {pos:0.85,color:'rgba(80,110,200,0.8)'},{pos:1.0,color:'rgba(80,180,130,0.8)'},
-  ];
-  function ctb(pts){
-    const b=[];
-    for(let i=0;i<pts.length-1;i++){
-      const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
-      b.push({x1:p1.x+(p2.x-p0.x)/6,y1:p1.y+(p2.y-p0.y)/6,x2:p2.x-(p3.x-p1.x)/6,y2:p2.y-(p3.y-p1.y)/6,ex:p2.x,ey:p2.y,sx:p1.x,sy:p1.y});
-    }
-    return b;
-  }
-  ctb(points).forEach(b=>{
-    const grad=ctx.createLinearGradient(px({x:b.sx}),0,px({x:b.ex}),0);
-    let c0=gc[0].color,c1=gc[0].color;
-    for(let g=0;g<gc.length-1;g++){
-      if(b.sx>=gc[g].pos&&b.sx<=gc[g+1].pos)c0=gc[g].color;
-      if(b.ex>=gc[g].pos&&b.ex<=gc[g+1].pos)c1=gc[g+1].color;
-    }
-    grad.addColorStop(0,c0);grad.addColorStop(1,c1);
-    ctx.beginPath();
-    ctx.moveTo(px({x:b.sx}),py({x:b.sx,y:b.sy}));
-    ctx.bezierCurveTo(px({x:b.x1}),py({x:b.x1,y:b.y1}),px({x:b.x2}),py({x:b.x2,y:b.y2}),px({x:b.ex}),py({x:b.ex,y:b.ey}));
-    ctx.strokeStyle=grad;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
-  });
-  [{idx:0,color:'rgba(160,145,60,0.8)'},{idx:4,color:'rgba(200,70,50,0.8)'},{idx:5,color:'rgba(42,138,150,1)'},{idx:8,color:'rgba(80,110,200,0.8)'},{idx:11,color:'rgba(80,180,130,0.8)'}]
-  .forEach(kp=>{
-    const p=points[kp.idx];
-    ctx.beginPath();ctx.arc(px(p),py(p),4,0,Math.PI*2);
-    ctx.fillStyle=kp.color;ctx.fill();
-  });
-}
-window.addEventListener('load',drawAporiaChart);
-window.addEventListener('resize',drawAporiaChart);
-setTimeout(drawAporiaChart,400);
-</script>
-</body>
-</html>
+OPEN MEDICINE STUDIO
+BEGIN
+A MEDICALLY SUPERVISED CLINICAL SERVICE
+Access the benefits of water fasting.
+
+Five days. At home. Under continuous physician oversight and research-grade monitoring. Conducted by a physician who has spent years understanding what this process can do.
+THE MOMENT THAT STARTED EVERYTHING
+Forty Days on the Atlantic
+WHY I BUILT THIS, AND WHERE IT BEGAN
+
+In 2008 I was the ship's doctor on a forty-day Atlantic crossing. Three men in crisis boarded that boat. By the time we made landfall, something had shifted in each of them — something I couldn't account for with the medicine I'd been trained in.
+I've spent the years since trying to understand what I witnessed. Open Medicine Studio is what I built when I finally did — a clinical service designed to create those conditions carefully, with good data underneath them, and a physician present throughout.
+WHAT I BUILT, AND WHY
+About the Studio
+A WORKING STUDIO, BUILT IN CLINICAL REGISTER
+
+I built Open Medicine Studio because I needed a place where this work could be done carefully and taken seriously — not flattened into wellness, and not pushed into a clinical category that didn't quite fit.
+The work centres on one thing: creating the conditions under which a human nervous system can briefly soften its defences, expand its range, and return to ordinary life with more capacity than it had before. The way I do that is through a medically supervised water fast, conducted at home, with continuous remote monitoring and daily physician oversight from me personally.
+The supervision is close. The monitoring is research-grade. And the pace of the work is set by what your body is actually doing — not by a schedule.
+A CLINICALLY ESTABLISHED INTERVENTION
+Water Fasting
+DECADES OF MEDICAL RESEARCH, TAKEN SERIOUSLY
+
+Therapeutic fasting under medical supervision has been studied since the 1960s. Its effects on metabolism, autonomic regulation, inflammation, and the central nervous system are well-documented in the published literature. This is an established area of medicine, not a fringe practice.
+What I bring to it is continuous remote monitoring at a resolution that hasn't previously been available in home-based fasting — paired with daily physician review throughout the week. The physiological basis of fasting is well understood. What I've added is a way to watch it unfold in real time, and to be genuinely present if something needs attention.
+WHAT HAPPENS IN THE BODY
+Physical Benefits
+CLINICAL OUTCOMES WITH REAL EVIDENCE BEHIND THEM
+
+Across five days of supervised fasting, the body moves through a documented sequence of physiological transitions. Insulin falls. Stored glycogen depletes. The body shifts from glucose to ketone metabolism. Cellular autophagy accelerates. Inflammatory markers decrease.
+Blood pressure
+Documented reductions across medically supervised fasting research spanning decades of peer-reviewed literature.
+Insulin sensitivity
+Meaningful improvements in insulin sensitivity and blood-sugar regulation, tracked in real time through continuous glucose monitoring.
+Inflammation
+Decreases in hepatic fat and measurable shifts in inflammatory markers, characterised across the published literature on supervised fasting.
+Cellular autophagy
+Accelerated cellular renewal as the metabolic shift into ketosis creates conditions for deeper cellular housekeeping.
+I follow all of these through your continuous data stream throughout the week.
+WHAT HAPPENS IN THE MIND
+Mental and Emotional Benefits
+CLARITY, AND A WIDER INTERNAL RANGE
+
+When the regular structure of meals is removed — along with the work, the screens, and the stimulation that normally fills the gaps — people tend to meet what daily life has been keeping at a distance. Sometimes that's clarity. Sometimes it's older material: boredom, restlessness, grief that hasn't had room to surface.
+What develops across the week has a name in the clinical literature: autonomic range. A wider band within which you can meet what life brings and remain regulated. People who've done this kind of work — in many forms, across many cultures, for a very long time — often describe coming back with more room than they left with. That's what I'm trying to support, carefully and with good data underneath it.
+A MEASURABLE PHYSIOLOGICAL SHIFT
+The Autonomic Transition Window
+WATCHED FOR IN REAL TIME, AROUND DAY THREE
+
+Around day three of a five-day fast — as the body completes its shift into ketone metabolism — the autonomic nervous system passes through a measurable transition. Sympathetic activation gives way to parasympathetic regulation. For a brief period, the patterns the system has been holding become available for revision.
+I call this the Autonomic Transition Window. As far as I know, no other clinical service is currently monitoring for it. It's detectable because the studio's monitoring architecture is built specifically to detect it. Your continuous heart rate variability, electrodermal activity, glucose, and ketone levels stream from the wearables on your wrist to a secure Canadian-hosted database, where my signal-detection system reads the data as it arrives.
+When the monitoring shows the window opening, my attention turns to you. What you do with that time is yours. I hold the clinical conditions that make it possible.
+THE TRANSFORMATION ARC
+Aporia Score (AS) trajectory across the five-day fast and re-entry
+
+ARRIVAL &
+INTAKE
+SHIFT BEGINS
+KETOSIS ENTRY
+AUTONOMIC
+WINDOW
+DEEP
+REGULATION
+PARASYM-
+PATHETIC
+REFEEDING
+RE-ENTRY &
+EXPANSION
+FIVE DAYS, MAPPED
+The Journey
+DAYS 1–2
+The body shifts
+Hunger arrives and passes. Energy drops, then settles. The system moves into ketone metabolism. Sympathetic activation rises as the body works through the metabolic transition — this is normal, expected, and closely watched.
+DAY 3
+The window opens
+The Autonomic Transition Window opens. The defended configurations the system has been holding soften briefly. My monitoring registers it. What happens in that time belongs to you.
+DAYS 4–5
+Deep regulation
+The system settles into parasympathetic dominance. Clarity arrives. A wider range of internal states becomes accessible. Many people describe these days as genuinely restful in a way they haven't experienced in years.
+RE-ENTRY
+Returning with more room
+Carefully sequenced refeeding over the following days. A structured review with me once you're through it. You return to your ordinary life with a measurably expanded tolerance range and a full record of what your system did during the week.
+REMOTE, MONITORED, SUPERVISED BY ME
+How It Works
+THE PRACTICAL SHAPE OF THE FIVE DAYS
+
+The fast takes place at home, in your own environment, on your own schedule. Everything is designed to be as simple to manage as possible on your end — the monitoring runs in the background, and I do the watching.
+KIT
+Your monitoring devices arrive by courier
+An EmbracePlus wristband, a Dexcom Stelo continuous glucose monitor, a blood ketone meter, and a blood pressure cuff. Setup takes about fifteen minutes, and I'm available to help if anything needs troubleshooting.
+FAST
+Water, with everything reviewed in advance
+The fast itself is water only. Black coffee, tea, and any prescribed medications are reviewed individually at intake. Electrolyte supplementation is used when clinically indicated. Nothing is left to guesswork.
+WATCH
+Continuous data, reviewed daily by me
+Your devices stream data throughout the week. I review it each day and am available for clinical questions at any point. The week works best with a quiet rhythm — rest, gentle movement, time outdoors, minimal demands from work or screens.
+CLOSE
+Refeeding and a review together
+Refeeding begins on day six with a carefully sequenced protocol. Once you're through it, we meet to look together at what the data captured and what you experienced. That conversation is part of the work.
+HELD WITHOUT BEING MANAGED
+What the Experience is Like
+A MONITORED CLINICAL EXPERIENCE, IN THE QUIET OF YOUR OWN HOME
+
+The structure of this work is unusual. You're held without being managed. The monitoring does the reporting — your body's signals stream continuously to my dashboard, and I'm reading them. There's no need to perform wellness, to justify your experience, or to explain how you feel.
+For people who have spent a long time being responsible for others, that experience — of being present in your own life while someone else watches the data — can itself be meaningful. It's part of what creates space for the deeper work. You're not alone in there. And you don't have to navigate it by yourself.
+CLINICAL ELIGIBILITY, REVIEWED INDIVIDUALLY
+Is This For You
+A REAL CLINICAL INTERVENTION — SCREENING MATTERS
+
+A medically supervised water fast is a genuine clinical intervention, and I screen carefully. The work is most safely offered to people who arrive in a stable enough place to undertake it — physically healthy, able to clear five quiet days, and not currently managing conditions that would make fasting unsafe.
+The week works best when your calendar has real space in it — no demanding work commitments, no travel, no significant obligations. That's not about comfort; it's about giving your system the conditions it needs to do what you're asking it to do.
+All participants remain under the care of their own family physician throughout. My role is to supervise the fast specifically — I work alongside your primary medical care, not instead of it.
+I screen carefully for the following, and will discuss anything that applies at intake:
+		Pregnancy or breastfeeding Type 1 diabetes or other insulin-dependent conditions Medications that require food Current or recent eating disorders Significant cardiac, renal, hepatic, or psychiatric conditions Acute crisis of any kind
+Contraindications are reviewed individually at intake. I hold the authority to recommend modification or postponement at any point in the process, and I use it when it's needed.
+THE PHYSICIAN BEHIND THE STUDIO
+About Me
+￼
+DR. ADRIAAN VAN DER WART, MBCHB
+
+I'm a family and emergency physician practising in British Columbia. My medical training was completed in South Africa, and I've worked across emergency, rural, northern, Indigenous, expedition, and end-of-life medicine in Canada for over a decade.
+In 2008, I joined a forty-day sailing voyage across the Atlantic as ship's doctor for three men attempting an extended fast. They were in genuine crisis when they boarded. By the time we made landfall, they had changed in ways that the medicine I'd been trained in couldn't fully account for. I didn't understand what I was seeing at the time. The work since then has been figuring it out.
+Along the way I've done my own fasts, sat with silence and with plant medicines under careful guidance, climbed mountains, burned out, and come back. Open Medicine Studio is what I built when I finally understood what I'd been looking at on that boat. It's the offering I've come to believe in — grounded in clinical practice, made possible by the monitoring technology that now allows a physician to be genuinely present at a distance.
+AN INVITATION, WALKED CAREFULLY
+How to Begin
+THE PATH IN IS INTENTIONALLY GRADUAL
+
+I designed the intake process to be careful on both sides. It gives me what I need to understand your situation, and it gives you what you need to decide whether this is the right thing for you right now.
+01
+Reach out to Natalie Moore, my assistant, at natalie@openmedicinestudio.com. She'll send you a brief eligibility check — about five minutes — and answer your initial questions.
+02
+If the eligibility check is clear, the next step is a structured medical intake — about twenty-five minutes, completed through the Jane patient portal. I review everything before we meet.
+03
+We meet one-on-one. I walk through your intake, describe the likely physiological routing of your fast, and we talk through the specific support I'll provide during the week. The consultation fee is $100 CAD, invoiced afterward. If you go ahead with the fast, that amount comes off your final invoice.
+04
+If we both feel the fast is the right next step, you book. A deposit is required to hold your place. If the fast ends early — by your choice in consultation with me, or by my clinical recommendation — partial reimbursement is available, calculated against the days completed.
+$2,500 CAD
+Total cost of the supervised fast
+From first contact to the first day of fasting is typically four to eight weeks, depending on how quickly the intake is completed and how the consultation goes. I work with a small number of participants at a time — the work requires that.
+BEGIN — NATALIE@OPENMEDICINESTUDIO.COM
+General inquiries: info@openmedicinestudio.com
+
+OPEN MEDICINE STUDIO
+CONTACT
+BEGIN
+© 2025 Open Medicine Studio
