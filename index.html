@@ -24,7 +24,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; background: var(--bg); }
+  html { background: var(--bg); scroll-snap-type: y mandatory; overflow-y: scroll; height: 100%; }
 
   body {
     background: transparent;
@@ -35,7 +35,23 @@
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    padding-bottom: 4rem;
+  }
+
+  .snap-container {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 3rem;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .snap-container.hero-snap {
+    padding: 5rem 3rem;
+    align-items: center;
   }
 
   body::before {
@@ -45,11 +61,11 @@
     z-index: -1;
     background-color: var(--bg);
     background-image:
-      radial-gradient(ellipse 120% 50% at 0% 0%, rgba(42,138,150,0.14) 0%, transparent 60%),
-      radial-gradient(ellipse 80% 70% at 100% 15%, rgba(175,150,220,0.11) 0%, transparent 55%),
-      radial-gradient(ellipse 90% 60% at 15% 85%, rgba(42,138,150,0.1) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 50% at 85% 88%, rgba(205,180,235,0.1) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200,228,232,0.07) 0%, transparent 65%);
+      radial-gradient(ellipse 120% 50% at 0% 0%, rgba(42,138,150,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 70% at 100% 15%, rgba(175,150,220,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 90% 60% at 15% 85%, rgba(42,138,150,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 85% 88%, rgba(205,180,235,0.28) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200,228,232,0.18) 0%, transparent 65%);
   }
 
   nav {
@@ -88,57 +104,64 @@
     color: var(--accent);
     text-decoration: none;
     border: 1px solid rgba(42,138,150,0.25);
-    padding: 0.6rem 1.6rem;
+    padding: 0.6rem 1.8rem;
+    border-radius: 100px;
     transition: background 0.2s;
   }
   .nav-cta:hover { background: var(--accent-dim); }
 
   section {
     position: relative;
-    padding: 7rem 5rem;
-    border: 1px solid rgba(46,49,48,0.15);
-    border-radius: 16px;
-    background: rgba(247,244,240,0.55);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    margin: 1.5rem 2rem;
+    padding: 4rem 5rem;
+    border: 1px solid rgba(46,49,48,0.12);
+    border-radius: 12px;
+    background: rgba(247,244,240,0.35);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    margin: 0;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    scroll-snap-align: none;
   }
   section.visible { opacity: 1; transform: translateY(0); }
 
   section.gradient {
     overflow: hidden;
-    background: rgba(247,244,240,0.55);
-    border: 1px solid rgba(46,49,48,0.15);
-    border-radius: 16px;
+    background: rgba(247,244,240,0.35);
+    border: 1px solid rgba(46,49,48,0.12);
+    border-radius: 12px;
   }
 
   section.gradient::before { display: none; }
   section.gradient > * { position: relative; z-index: 1; }
-  section.alt { background: rgba(238,235,230,0.5); }
+  section.alt { background: rgba(247,244,240,0.35); }
 
   section#hero {
-    padding: 0;
-    min-height: 100vh;
+    padding: 4rem 5rem;
+    min-height: unset;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     opacity: 1;
     transform: none;
     margin: 0;
-    border-radius: 0;
-    border: none;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    border-radius: 12px;
+    border: 1px solid rgba(46,49,48,0.12);
+    background: rgba(247,244,240,0.35);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    overflow: hidden;
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
-    padding: 0 4rem 7rem;
+    padding: 0;
   }
 
   /* HEADING HIERARCHY — small descriptor on top, big title below */
@@ -199,8 +222,7 @@
   }
 
   .split-left {
-    position: sticky;
-    top: 8rem;
+    position: static;
   }
 
   .split-body { padding-top: 0.25rem; }
@@ -490,17 +512,22 @@
   }
   .cta-button:hover { background: rgba(42,138,150,0.07); }
 
+  .snap-container.footer-snap {
+    padding: 0;
+  }
+
   footer {
     padding: 3rem 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid rgba(46,49,48,0.15);
-    border-radius: 16px;
-    background: rgba(247,244,240,0.55);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    margin: 1.5rem 2rem 0;
+    border: none;
+    border-top: 1px solid rgba(46,49,48,0.12);
+    border-radius: 0;
+    background: rgba(247,244,240,0.35);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    width: 100%;
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -521,8 +548,8 @@
 
   @media (max-width: 960px) {
     nav { padding: 1.25rem 2rem; }
-    section { padding: 5rem 2rem; margin: 1rem 1rem; }
-    .hero-content { padding: 0 2rem 5rem; }
+    .snap-container { padding: 4rem 1.5rem; }
+    section { padding: 3rem 2rem; }
     .split-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .split-left { position: static; }
     .section-title { font-size: clamp(2rem, 7vw, 3.2rem); }
@@ -531,7 +558,7 @@
     .benefit-cols { grid-template-columns: 1fr; }
     .phase-strip { grid-template-columns: repeat(4, 1fr); }
     .phase:nth-child(4) { border-right: none; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; margin: 1rem 1rem 0; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
     .booking-block { padding: 2rem; }
     .hero-title { font-size: clamp(3.5rem, 13vw, 7rem); }
     .title-display { font-size: clamp(2.5rem, 10vw, 5rem); }
@@ -557,6 +584,7 @@
 </nav>
 
 <!-- 01 HERO -->
+<div class="snap-container hero-snap">
 <section id="hero" class="gradient">
   <div class="hero-content">
     <span class="section-descriptor on-gradient">A medically supervised clinical service</span>
@@ -565,8 +593,10 @@
     <p class="hero-sub">Five days. At home. Under continuous physician oversight and research-grade monitoring. Conducted by a physician who has spent years understanding what this process can do.</p>
   </div>
 </section>
+</div>
 
 <!-- 01b THE STORY -->
+<div class="snap-container">
 <section id="the-story">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -583,8 +613,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 02 ABOUT THE STUDIO -->
+<div class="snap-container">
 <section id="about">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -602,8 +634,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 03 WATER FASTING -->
+<div class="snap-container">
 <section id="what-is-fasting" class="alt">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -620,8 +654,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 04 PHYSICAL BENEFITS -->
+<div class="snap-container">
 <section id="benefits-physical">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -656,8 +692,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 05 MENTAL BENEFITS -->
+<div class="snap-container">
 <section id="benefits-mental" class="alt">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -674,8 +712,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 06 GOLDEN WINDOW -->
+<div class="snap-container">
 <section id="golden-window" class="gradient">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -708,8 +748,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 07 THE JOURNEY -->
+<div class="snap-container">
 <section id="journey">
   <div class="section-inner wide">
     <span class="section-descriptor">Five days, mapped</span>
@@ -738,8 +780,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 08 HOW IT WORKS -->
+<div class="snap-container">
 <section id="how-it-works" class="alt">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -785,8 +829,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 09 WHAT THE EXPERIENCE IS LIKE -->
+<div class="snap-container">
 <section id="experience">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -803,8 +849,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 10 IS THIS FOR YOU -->
+<div class="snap-container">
 <section id="for-you" class="alt">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -832,8 +880,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 11 ABOUT ME -->
+<div class="snap-container">
 <section id="about-me">
   <div class="section-inner wide">
     <span class="section-descriptor">The physician behind the studio</span>
@@ -853,8 +903,10 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- 12 HOW TO BEGIN -->
+<div class="snap-container">
 <section id="begin" class="gradient">
   <div class="section-inner wide">
     <div class="split-layout">
@@ -897,7 +949,9 @@
     </div>
   </div>
 </section>
+</div>
 
+<div class="snap-container footer-snap">
 <footer>
   <div style="display:flex; align-items:center; gap:0.75rem;">
     <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
@@ -912,15 +966,16 @@
   </div>
   <p class="footer-copy">© 2025 Open Medicine Studio</p>
 </footer>
+</div>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.06 });
 
-document.querySelectorAll('section, footer').forEach(el => observer.observe(el));
+document.querySelectorAll('section, footer').forEach(el => revealObserver.observe(el));
 
 function drawAporiaChart() {
   const canvas = document.getElementById('aporia-chart');
