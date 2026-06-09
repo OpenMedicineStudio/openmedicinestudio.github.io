@@ -30,8 +30,8 @@
     background: transparent;
     color: var(--text);
     font-family: var(--body);
-    font-size: 17px;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.72;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -40,12 +40,11 @@
   .snap-container {
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5rem 3rem;
-    overflow: hidden;
     box-sizing: border-box;
   }
 
@@ -120,8 +119,6 @@
     -webkit-backdrop-filter: blur(32px) saturate(1.4);
     margin: 0;
     width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -512,8 +509,116 @@
   }
   .cta-button:hover { background: rgba(42,138,150,0.07); }
 
+  /* HOW IT WORKS GRID */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .how-card {
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(46,49,48,0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                box-shadow 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                background 0.35s ease,
+                border-color 0.35s ease;
+    overflow: hidden;
+    user-select: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .how-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(42,138,150,0.08), 0 4px 12px rgba(46,49,48,0.06);
+    background: rgba(255,255,255,0.65);
+  }
+
+  .how-card.open {
+    background: rgba(255,255,255,0.75);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 64px rgba(42,138,150,0.12), 0 8px 24px rgba(46,49,48,0.06);
+    border-color: rgba(42,138,150,0.3);
+  }
+
+  .how-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2.25rem;
+    pointer-events: none;
+  }
+
+  .how-header-left { display: flex; align-items: center; gap: 1.25rem; }
+
+  .how-num {
+    font-family: var(--serif);
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .how-header h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .how-arrow {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(42,138,150,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 300;
+    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), background 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .how-card.open .how-arrow {
+    transform: rotate(45deg);
+    background: rgba(42,138,150,0.08);
+  }
+
+  .how-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94), padding 0.4s ease;
+    padding: 0 2.25rem;
+  }
+
+  .how-card.open .how-body {
+    max-height: 200px;
+    padding: 0 2.25rem 2rem;
+  }
+
+  .how-body p {
+    font-size: 0.88rem;
+    margin: 0;
+    color: rgba(46,49,48,0.6);
+    border-top: 1px solid rgba(42,138,150,0.12);
+    padding-top: 1.25rem;
+    line-height: 1.7;
+  }
+
   .snap-container.footer-snap {
     padding: 0;
+    min-height: unset;
+    align-items: stretch;
   }
 
   footer {
@@ -786,44 +891,55 @@
 <div class="snap-container">
 <section id="how-it-works" class="alt">
   <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">Remote, monitored, supervised by me</span>
-        <h2 class="section-title">How It Works</h2>
+    <span class="section-descriptor">Remote, monitored, supervised by me</span>
+    <h2 class="section-title" style="margin-bottom: 2.5rem;">How It Works</h2>
+    <div class="how-grid">
+      <div class="how-card" onclick="toggleHow(this)">
+        <div class="how-header">
+          <div class="how-header-left">
+            <span class="how-num">01</span>
+            <h4>The kit</h4>
+          </div>
+          <span class="how-arrow">+</span>
+        </div>
+        <div class="how-body">
+          <p>Your monitoring devices arrive by courier before the fast begins — an EmbracePlus wristband, a Dexcom Stelo continuous glucose monitor, a blood ketone meter, and a blood pressure cuff. Setup takes about fifteen minutes, and I'm available to help if anything needs troubleshooting.</p>
+        </div>
       </div>
-      <div class="split-body">
-        <p class="body-intro">The practical shape of the five days</p>
-        <div class="divider"></div>
-        <p>The fast takes place at home, in your own environment, on your own schedule. Everything is designed to be as simple to manage as possible on your end — the monitoring runs in the background, and I do the watching.</p>
-        <div class="steps">
-          <div class="step">
-            <span class="step-num">Kit</span>
-            <div class="step-content">
-              <h4>Your monitoring devices arrive by courier</h4>
-              <p>An EmbracePlus wristband, a Dexcom Stelo continuous glucose monitor, a blood ketone meter, and a blood pressure cuff. Setup takes about fifteen minutes, and I'm available to help if anything needs troubleshooting.</p>
-            </div>
+      <div class="how-card" onclick="toggleHow(this)">
+        <div class="how-header">
+          <div class="how-header-left">
+            <span class="how-num">02</span>
+            <h4>The fast</h4>
           </div>
-          <div class="step">
-            <span class="step-num">Fast</span>
-            <div class="step-content">
-              <h4>Water, with everything reviewed in advance</h4>
-              <p>The fast itself is water only. Black coffee, tea, and any prescribed medications are reviewed individually at intake. Electrolyte supplementation is used when clinically indicated. Nothing is left to guesswork.</p>
-            </div>
+          <span class="how-arrow">+</span>
+        </div>
+        <div class="how-body">
+          <p>Water only. Black coffee, tea, and any prescribed medications are reviewed individually at intake. Electrolyte supplementation is used when clinically indicated. Nothing is left to guesswork — everything is confirmed in advance.</p>
+        </div>
+      </div>
+      <div class="how-card" onclick="toggleHow(this)">
+        <div class="how-header">
+          <div class="how-header-left">
+            <span class="how-num">03</span>
+            <h4>The watch</h4>
           </div>
-          <div class="step">
-            <span class="step-num">Watch</span>
-            <div class="step-content">
-              <h4>Continuous data, reviewed daily by me</h4>
-              <p>Your devices stream data throughout the week. I review it each day and am available for clinical questions at any point. The week works best with a quiet rhythm — rest, gentle movement, time outdoors, minimal demands from work or screens.</p>
-            </div>
+          <span class="how-arrow">+</span>
+        </div>
+        <div class="how-body">
+          <p>Your devices stream data continuously throughout the week. I review it each day and am available for clinical questions at any point. The week works best with a quiet rhythm — rest, gentle movement, time outdoors, minimal demands from work or screens.</p>
+        </div>
+      </div>
+      <div class="how-card" onclick="toggleHow(this)">
+        <div class="how-header">
+          <div class="how-header-left">
+            <span class="how-num">04</span>
+            <h4>The close</h4>
           </div>
-          <div class="step">
-            <span class="step-num">Close</span>
-            <div class="step-content">
-              <h4>Refeeding and a review together</h4>
-              <p>Refeeding begins on day six with a carefully sequenced protocol. Once you're through it, we meet to look together at what the data captured and what you experienced. That conversation is part of the work.</p>
-            </div>
-          </div>
+          <span class="how-arrow">+</span>
+        </div>
+        <div class="how-body">
+          <p>Refeeding begins on day six with a carefully sequenced protocol. Once you're through it, we meet to look together at what the data captured and what you experienced. That conversation is part of the work.</p>
         </div>
       </div>
     </div>
@@ -890,7 +1006,7 @@
     <h2 class="title-display">About Me</h2>
     <div class="doctor-grid">
       <div>
-        <img src="photo.jpg" alt="Dr. Adriaan van der Wart" class="doctor-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <img src="bio.jpg" alt="Dr. Adriaan van der Wart" class="doctor-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
         <div class="doctor-photo-placeholder" style="display:none">Photo</div>
       </div>
       <div>
@@ -969,6 +1085,10 @@
 </div>
 
 <script>
+function toggleHow(card) {
+  card.classList.toggle('open');
+}
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
