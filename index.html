@@ -653,6 +653,93 @@
   section.visible .hero-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
   section.visible .hero-sub { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
 
+  /* BEGIN ANCHOR SEQUENCE */
+  .begin-anchor-seq {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    gap: 0;
+  }
+
+  .begin-anchor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: background 0.2s;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .begin-anchor:hover { background: rgba(42,138,150,0.04); }
+  .begin-anchor.open { background: rgba(42,138,150,0.05); }
+
+  .begin-anchor-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 2rem 1.25rem 1.5rem;
+    pointer-events: none;
+  }
+
+  .begin-anchor-num {
+    font-family: var(--serif);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  .begin-anchor-label {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    font-weight: 400;
+  }
+
+  .begin-anchor-arrow {
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 300;
+    transition: transform 0.3s ease;
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  .begin-anchor.open .begin-anchor-arrow { transform: rotate(45deg); }
+
+  .begin-anchor-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.25rem;
+    text-align: center;
+  }
+
+  .begin-anchor.open .begin-anchor-body {
+    max-height: 150px;
+    padding: 0 1.25rem 1.5rem;
+  }
+
+  .begin-anchor-body p {
+    font-size: 0.82rem;
+    color: rgba(46,49,48,0.6);
+    line-height: 1.65;
+    margin: 0;
+    border-top: 1px solid rgba(42,138,150,0.12);
+    padding-top: 1rem;
+  }
+
+  .begin-anchor-divider {
+    width: 1px;
+    background: rgba(46,49,48,0.08);
+    flex-shrink: 0;
+  }
+
   /* BEGIN SECTION */
   .begin-inner {
     width: 100%;
@@ -1172,7 +1259,6 @@
 </style>
 </head>
 <body>
-
 <nav>
   <a href="#hero" class="nav-logo">
     <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="Open Medicine Studio">
@@ -1184,7 +1270,7 @@
   <a href="#begin" class="nav-cta">Begin</a>
 </nav>
 
-<!-- 01 HERO -->
+<!-- HERO -->
 <div class="snap-container hero-snap">
 <section id="hero" class="gradient">
   <div class="hero-content">
@@ -1195,14 +1281,14 @@
 </section>
 </div>
 
-<!-- 03 WATER FASTING -->
+<!-- THE CLINICAL PREMISE -->
 <div class="snap-container">
 <section id="what-is-fasting" class="alt">
   <div class="section-inner wide">
     <div class="split-layout">
       <div class="split-left">
         <span class="section-descriptor">Water fasting</span>
-        <h2 class="section-title">What is it, Why do it?</h2>
+        <h2 class="section-title">What It Is,<br>Why It Works</h2>
       </div>
       <div class="split-body">
         <p class="body-intro">A clinically established intervention with a simple premise</p>
@@ -1216,72 +1302,44 @@
 </section>
 </div>
 
-<!-- 04 PHYSICAL BENEFITS -->
+<!-- WHAT MAY SHIFT -->
 <div class="snap-container">
-<section id="benefits-physical">
+<section id="benefits">
   <div class="section-inner wide">
     <div class="split-layout">
       <div class="split-left">
-        <span class="section-descriptor">What happens in the body</span>
-        <h2 class="section-title">Physical Benefits</h2>
+        <span class="section-descriptor">Physical and neurological change</span>
+        <h2 class="section-title">What May Shift</h2>
       </div>
       <div class="split-body">
-        <p class="body-intro">Documented outcomes, tracked in real time</p>
+        <p class="body-intro">One integrated physiological process, two dimensions</p>
         <div class="divider"></div>
-        <p>When digestion stops, the body's repair systems accelerate. Across five days of supervised fasting, the body moves through a documented sequence of physiological transitions — each one measurable, each one watched.</p>
         <div class="benefit-cols">
-          <div class="benefit-item">
-            <h4>Blood pressure</h4>
-            <p>Documented reductions across medically supervised fasting research spanning decades of peer-reviewed literature.</p>
+          <div class="benefit-item" style="border-top: 2px solid var(--accent);">
+            <h4 style="font-family:var(--serif); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem;">In the body</h4>
+            <p style="font-size:0.88rem; margin-bottom:0.75rem;">Blood pressure decreases. Insulin sensitivity improves. Inflammatory markers shift. Cellular autophagy accelerates as the body, freed from digestion, turns its energy toward repair.</p>
+            <p style="font-size:0.88rem; margin-bottom:0;">These are documented outcomes across decades of peer-reviewed research on medically supervised fasting. I follow each of them through your continuous data stream throughout the week.</p>
           </div>
-          <div class="benefit-item alt-bg">
-            <h4>Insulin sensitivity</h4>
-            <p>Meaningful improvements in insulin sensitivity and blood-sugar regulation, tracked in real time through continuous glucose monitoring.</p>
-          </div>
-          <div class="benefit-item alt-bg">
-            <h4>Inflammation</h4>
-            <p>Decreases in hepatic fat and measurable shifts in inflammatory markers, characterised across the published literature on supervised fasting.</p>
-          </div>
-          <div class="benefit-item">
-            <h4>Cellular autophagy</h4>
-            <p>Freed from its digestive workload, the body accelerates cellular cleanup — clearing debris and renewing tissue at a rate not possible during normal eating.</p>
+          <div class="benefit-item alt-bg" style="border-top: 2px solid rgba(46,49,48,0.12);">
+            <h4 style="font-family:var(--serif); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem;">In the mind and nervous system</h4>
+            <p style="font-size:0.88rem; margin-bottom:0.75rem;">Without the regular punctuation of meals — and the stimulation that normally fills the gaps — people meet what daily life has been keeping at a distance. Sometimes clarity. Sometimes older material: boredom, restlessness, grief that hasn't had room to surface.</p>
+            <p style="font-size:0.88rem; margin-bottom:0;">What develops has a name in the clinical literature: autonomic range. A wider band within which you can meet what life brings and remain regulated. People describe coming back with more room than they left with.</p>
           </div>
         </div>
-        <p style="margin-top: 1.75rem;">I follow all of these through your continuous data stream throughout the week.</p>
       </div>
     </div>
   </div>
 </section>
 </div>
 
-<!-- 05 MENTAL BENEFITS -->
-<div class="snap-container">
-<section id="benefits-mental" class="alt">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">What happens in the mind</span>
-        <h2 class="section-title">Mental and Emotional Benefits</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Clarity, and a wider internal range</p>
-        <div class="divider"></div>
-        <p>When the regular structure of meals is removed — along with the work, the screens, and the stimulation that normally fills the gaps — people tend to meet what daily life has been keeping at a distance. Sometimes that's clarity. Sometimes it's older material: boredom, restlessness, grief that hasn't had room to surface.</p>
-        <p>What develops across the week has a name in the clinical literature: autonomic range. A wider band within which you can meet what life brings and remain regulated. People who've done this kind of work — in many forms, across many cultures, for a very long time — often describe coming back with more room than they left with. That's what I'm trying to support, carefully and with good data underneath it.</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- 06 GOLDEN WINDOW -->
+<!-- THE AUTONOMIC TRANSITION WINDOW -->
 <div class="snap-container">
 <section id="golden-window" class="gradient">
   <div class="section-inner wide">
     <div class="split-layout">
       <div class="split-left">
         <span class="section-descriptor on-gradient">A measurable physiological shift</span>
-        <h2 class="section-title on-gradient">The Autonomic Transition Window</h2>
+        <h2 class="section-title on-gradient">The Autonomic<br>Transition Window</h2>
       </div>
       <div class="split-body">
         <p class="body-intro on-gradient">Watched for in real time, around day three</p>
@@ -1306,8 +1364,6 @@
         <div class="phase">Re-entry &amp;<br>expansion</div>
       </div>
     </div>
-
-    <!-- Monitoring Architecture Diagram -->
     <div class="monitor-diagram">
       <div class="monitor-col">
         <div class="monitor-box">Wearables</div>
@@ -1328,32 +1384,30 @@
 </section>
 </div>
 
-<!-- 07 THE JOURNEY -->
+<!-- THE FIVE-DAY JOURNEY -->
 <div class="snap-container">
 <section id="journey">
   <div class="section-inner wide">
     <span class="section-descriptor">Five days, mapped</span>
     <h2 class="title-display">The Journey</h2>
-
-    <!-- Timeline -->
     <div class="timeline">
       <div class="timeline-track">
         <div class="timeline-line"></div>
-        <div class="timeline-node" data-active="false">
+        <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="timeline-label">
             <span class="timeline-day">Day 1</span>
             <span class="timeline-title">Arrival</span>
           </div>
         </div>
-        <div class="timeline-node" data-active="false">
+        <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="timeline-label">
             <span class="timeline-day">Day 2</span>
             <span class="timeline-title">The body shifts</span>
           </div>
         </div>
-        <div class="timeline-node" data-active="true">
+        <div class="timeline-node">
           <div class="timeline-dot teal"></div>
           <div class="timeline-label">
             <span class="timeline-day" style="color:var(--accent);">Day 3</span>
@@ -1361,14 +1415,14 @@
             <span class="timeline-note">Autonomic Transition Window</span>
           </div>
         </div>
-        <div class="timeline-node" data-active="false">
+        <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="timeline-label">
             <span class="timeline-day">Days 4–5</span>
             <span class="timeline-title">Deep regulation</span>
           </div>
         </div>
-        <div class="timeline-node" data-active="false">
+        <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="timeline-label">
             <span class="timeline-day">Day 6+</span>
@@ -1377,8 +1431,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Detail cards below -->
     <div class="days-grid" style="margin-top: 3rem;">
       <div class="day-block accent-left">
         <span class="day-num">Days 1–2</span>
@@ -1398,14 +1450,20 @@
       <div class="day-block">
         <span class="day-num">Re-entry</span>
         <h4>Returning with more room</h4>
-        <p>Carefully sequenced refeeding over the following days. A structured review with me once you're through it. You return to your ordinary life with a measurably expanded tolerance range and a full record of what your system did during the week.</p>
+        <p>Carefully sequenced refeeding. A structured review with me once you're through it. You return to your ordinary life with a measurably expanded tolerance range and a full record of what your system did during the week.</p>
       </div>
+    </div>
+
+    <!-- What it feels like — small honest paragraph -->
+    <div style="margin-top: 2.5rem; padding: 1.75rem 2rem; background: rgba(255,255,255,0.3); border: 1px solid rgba(46,49,48,0.07); border-radius: 8px;">
+      <p style="font-family:var(--serif); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem;">What it feels like</p>
+      <p style="font-size:0.92rem; margin:0; color:rgba(46,49,48,0.65); line-height:1.75;">Most people move through waves: hunger, quiet, restlessness, clarity, emotion, and deep fatigue or stillness. Nothing is forced. The work is to stay close to the body, the data, and the moment.</p>
     </div>
   </div>
 </section>
 </div>
 
-<!-- 08 HOW IT WORKS -->
+<!-- HOW IT WORKS -->
 <div class="snap-container">
 <section id="how-it-works" class="alt">
   <div class="section-inner wide">
@@ -1453,27 +1511,7 @@
 </section>
 </div>
 
-<!-- 09 WHAT THE EXPERIENCE IS LIKE -->
-<div class="snap-container">
-<section id="experience">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">Held without being managed</span>
-        <h2 class="section-title">What the Experience is Like</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">A monitored clinical experience, in the quiet of your own home</p>
-        <div class="divider"></div>
-        <p>The structure of this work is unusual. You're held without being managed. The monitoring does the reporting — your body's signals stream continuously to my dashboard, and I'm reading them. There's no need to perform wellness, to justify your experience, or to explain how you feel.</p>
-        <p>For people who have spent a long time being responsible for others, that experience — of being present in your own life while someone else watches the data — can itself be meaningful. It's part of what creates space for the deeper work. You're not alone in there. And you don't have to navigate it by yourself.</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- 10 IS THIS FOR YOU -->
+<!-- IS THIS FOR YOU -->
 <div class="snap-container">
 <section id="for-you" class="alt">
   <div class="section-inner wide">
@@ -1486,7 +1524,6 @@
         <p class="body-intro">A real clinical intervention — screening matters</p>
         <div class="divider"></div>
         <p>A medically supervised water fast is a genuine clinical intervention, and I screen carefully. The work is most safely offered to people who arrive in a stable enough place to undertake it.</p>
-
         <div class="for-grid">
           <div class="for-col">
             <div class="for-col-header">
@@ -1516,8 +1553,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- Safety strip -->
         <div class="safety-strip">
           <span>Physician-supervised throughout</span>
           <span class="safety-divider">·</span>
@@ -1531,7 +1566,7 @@
 </section>
 </div>
 
-<!-- 11 ABOUT ME -->
+<!-- THE PHYSICIAN BEHIND THE STUDIO -->
 <div class="snap-container">
 <section id="about-me">
   <div class="section-inner wide">
@@ -1539,34 +1574,13 @@
       <img src="photo.jpg" alt="Dr. Adriaan van der Wart" style="width:100%; height:420px; object-fit:cover; object-position: center top; display:block; border-radius: 8px;" onerror="this.style.background='var(--bg2)';">
       <div>
         <span class="section-descriptor">The physician behind the studio</span>
-        <h2 class="section-title" style="margin-bottom: 1.5rem;">About Me</h2>
-        <p class="body-intro">Dr. Adriaan van der Wart, MBChB</p>
-        <div class="divider"></div>
-        <p>I'm a family and emergency physician practising in British Columbia. My medical training was completed in South Africa, and I've worked across emergency, rural, northern, Indigenous, expedition, and end-of-life medicine in Canada for over a decade.</p>
-        <p>In 2008, I joined a forty-day sailing voyage across the Atlantic as ship's doctor for three men attempting an extended fast. They were in genuine crisis when they boarded. By the time we made landfall, they had changed in ways that the medicine I'd been trained in couldn't fully account for.</p>
-        <p>Open Medicine Studio is what I built when I finally understood what I'd been looking at on that boat — grounded in clinical practice, made possible by monitoring technology that allows a physician to be genuinely present at a distance.</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- 02 ABOUT THE STUDIO -->
-<div class="snap-container">
-<section id="about">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">A new way of practising medicine</span>
-        <h2 class="section-title">About the Studio</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Built because the work needed a proper home</p>
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Dr. Adriaan van der Wart</h2>
+        <p class="body-intro">MBChB · Family and Emergency Medicine · British Columbia</p>
         <div class="divider"></div>
         <p>I built Open Medicine Studio because I needed a place where this work could be done carefully and taken seriously — not flattened into wellness, and not pushed into a clinical category that didn't quite fit.</p>
-        <p>What I work with is one thing: the conditions under which a human nervous system can briefly soften its defences, expand its range, and return to ordinary life with more capacity than it had before. The intervention is a medically supervised water fast. But what makes this different from anything else available is the way I watch it.</p>
-        <p>Most clinical medicine happens in a room. A patient arrives, describes what they've been experiencing, and leaves with a plan. My window into what's happening in your body is different — it's continuous, research-grade, and real time. Your heart rate variability, glucose, ketones, and electrodermal activity stream to me throughout the week. I'm not waiting to be called. I'm already reading.</p>
-        <p>That's the edge I've built. Not just the fast — but the quality of oversight wrapped around it. Medicine practised at a distance, at depth, and in real time.</p>
+        <p>I'm a family and emergency physician practising in British Columbia. My medical training was completed in South Africa, and I've worked across emergency, rural, northern, Indigenous, expedition, and end-of-life medicine in Canada for over a decade. Along the way I've done my own fasts, sat with silence and with plant medicines under careful guidance, climbed mountains, burned out, and come back.</p>
+        <p>In 2008, I was the ship's doctor on a forty-day Atlantic crossing. Three men in genuine crisis boarded that boat. By the time we made landfall, they had changed in ways that the medicine I'd been trained in couldn't account for. That experience set the direction of everything since.</p>
+        <p>What makes this different is the way I watch it. Most clinical medicine happens in a room. My window into what's happening in your body is continuous, research-grade, and real time. I'm not waiting to be called. I'm already reading. Medicine practised at a distance, at depth, and in real time.</p>
       </div>
     </div>
   </div>
@@ -1586,7 +1600,7 @@
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
@@ -1595,7 +1609,7 @@
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
@@ -1604,7 +1618,7 @@
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
@@ -1613,7 +1627,7 @@
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
@@ -1622,7 +1636,7 @@
           <span class="faq-arrow">+</span>
         </div>
         <div class="faq-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
       </div>
     </div>
@@ -1630,28 +1644,56 @@
 </section>
 </div>
 
+<!-- BEGIN -->
 <div class="snap-container">
 <section id="begin" class="gradient">
   <div class="begin-inner">
     <span class="section-descriptor on-gradient" style="text-align:center; display:block; margin-bottom:0.75rem;">An invitation, walked carefully</span>
     <h2 class="section-title on-gradient" style="text-align:center; font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3rem;">How to Begin</h2>
     <div class="begin-glass">
-      <div class="begin-steps">
-        <div class="begin-step">
-          <span class="begin-num">01</span>
-          <p>Reach out to Natalie Moore, my assistant, at <a href="mailto:natalie@openmedicinestudio.com">natalie@openmedicinestudio.com</a>. She'll send a brief eligibility check — about five minutes — and answer your initial questions.</p>
+      <div class="begin-anchor-seq">
+        <div class="begin-anchor" onclick="toggleAnchor(this)">
+          <div class="begin-anchor-top">
+            <div class="begin-anchor-num">01</div>
+            <div class="begin-anchor-label">Eligibility</div>
+            <span class="begin-anchor-arrow">+</span>
+          </div>
+          <div class="begin-anchor-body">
+            <p>A brief five-minute check with Natalie, my assistant. Quick questions to confirm the fast is appropriate for you.</p>
+          </div>
         </div>
-        <div class="begin-step">
-          <span class="begin-num">02</span>
-          <p>If eligibility is clear, the next step is a structured medical intake — about twenty-five minutes, completed through the Jane patient portal. I review everything before we meet.</p>
+        <div class="begin-anchor-divider"></div>
+        <div class="begin-anchor" onclick="toggleAnchor(this)">
+          <div class="begin-anchor-top">
+            <div class="begin-anchor-num">02</div>
+            <div class="begin-anchor-label">Intake</div>
+            <span class="begin-anchor-arrow">+</span>
+          </div>
+          <div class="begin-anchor-body">
+            <p>A structured twenty-five minute medical intake through the Jane portal. I review everything before we meet.</p>
+          </div>
         </div>
-        <div class="begin-step">
-          <span class="begin-num">03</span>
-          <p>We meet one-on-one. I walk through your intake, describe the likely physiological routing of your fast, and we agree on the support I'll provide. The consultation fee is $100 CAD — deducted from your final invoice if you proceed.</p>
+        <div class="begin-anchor-divider"></div>
+        <div class="begin-anchor" onclick="toggleAnchor(this)">
+          <div class="begin-anchor-top">
+            <div class="begin-anchor-num">03</div>
+            <div class="begin-anchor-label">Consultation</div>
+            <span class="begin-anchor-arrow">+</span>
+          </div>
+          <div class="begin-anchor-body">
+            <p>A one-on-one with me. We review your intake, I describe your likely physiological routing, and we agree on the week's support. $100 CAD — deducted if you proceed.</p>
+          </div>
         </div>
-        <div class="begin-step">
-          <span class="begin-num">04</span>
-          <p>If we both feel the fast is the right step, you book. A deposit is required. If the fast ends early, partial reimbursement is available, calculated against the days completed.</p>
+        <div class="begin-anchor-divider"></div>
+        <div class="begin-anchor" onclick="toggleAnchor(this)">
+          <div class="begin-anchor-top">
+            <div class="begin-anchor-num">04</div>
+            <div class="begin-anchor-label">Book</div>
+            <span class="begin-anchor-arrow">+</span>
+          </div>
+          <div class="begin-anchor-body">
+            <p>Deposit to hold your place. If the fast ends early, partial reimbursement is calculated against the days completed.</p>
+          </div>
         </div>
       </div>
       <div class="begin-price">
@@ -1671,8 +1713,6 @@
 </section>
 </div>
 
-
-
 <div class="snap-container footer-snap">
 <footer>
   <div style="display:flex; align-items:center; gap:0.75rem;">
@@ -1686,7 +1726,14 @@
 </footer>
 </div>
 
+
 <script>
+function toggleAnchor(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.begin-anchor').forEach(a => a.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
 function toggleFaq(item) {
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
