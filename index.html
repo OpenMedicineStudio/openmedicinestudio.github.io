@@ -208,8 +208,8 @@
     margin-bottom: 3.5rem;
   }
 
-  .section-inner { max-width: 760px; margin: 0 auto; }
-  .section-inner.wide { max-width: 1080px; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-inner.wide { max-width: 1440px; }
 
   .split-layout {
     display: grid;
@@ -373,23 +373,26 @@
 
   .doctor-grid {
     display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 4.5rem;
-    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-top: 1rem;
   }
 
   .doctor-photo {
     width: 100%;
-    aspect-ratio: 4/5;
+    height: 100%;
     object-fit: cover;
     object-position: center top;
     filter: grayscale(8%) contrast(1.04);
     display: block;
+    border-radius: 8px 0 0 8px;
   }
 
   .doctor-photo-placeholder {
     width: 100%;
-    aspect-ratio: 4/5;
+    height: 100%;
+    min-height: 400px;
     background: var(--bg2);
     border: 1px solid var(--border);
     display: flex;
@@ -400,6 +403,14 @@
     font-family: var(--serif);
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .doctor-text {
+    padding: 3rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .benefit-cols {
@@ -613,6 +624,212 @@
     border-top: 1px solid rgba(42,138,150,0.12);
     padding-top: 1.25rem;
     line-height: 1.7;
+  }
+
+  /* TEXT ANIMATIONS — titles only */
+  .section-descriptor,
+  .section-title,
+  .title-display,
+  .hero-title,
+  .body-intro,
+  .hero-sub,
+  .hero-eyebrow {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .section-descriptor { transition-delay: 0.05s; }
+  .section-title, .title-display, .hero-title { transition-delay: 0.15s; }
+  .body-intro { transition-delay: 0.25s; }
+  .hero-eyebrow { transition-delay: 0.1s; }
+  .hero-sub { transition-delay: 0.35s; }
+
+  section.visible .section-descriptor { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+  section.visible .section-title,
+  section.visible .title-display,
+  section.visible .hero-title { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+  section.visible .body-intro { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+  section.visible .hero-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+  section.visible .hero-sub { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+
+  /* BEGIN SECTION */
+  .begin-inner {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .begin-glass {
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    border: 1px solid rgba(46,49,48,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .begin-steps {
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .begin-step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(46,49,48,0.07);
+    align-items: start;
+  }
+
+  .begin-step:last-child { border-bottom: none; }
+
+  .begin-num {
+    font-family: var(--serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-top: 0.15rem;
+    opacity: 0.7;
+  }
+
+  .begin-step p {
+    font-size: 0.88rem;
+    margin: 0;
+    color: rgba(46,49,48,0.65);
+    line-height: 1.65;
+  }
+
+  .begin-step a { color: var(--accent); text-decoration: none; }
+  .begin-step a:hover { text-decoration: underline; }
+
+  .begin-price {
+    background: rgba(42,138,150,0.06);
+    border-top: 1px solid rgba(42,138,150,0.15);
+    padding: 2rem 3rem;
+    text-align: center;
+  }
+
+  .begin-price-amount {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .begin-price-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: var(--serif);
+    margin-bottom: 2rem;
+  }
+
+  .begin-cta {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid rgba(42,138,150,0.3);
+    padding: 0.9rem 2.5rem;
+    border-radius: 100px;
+    transition: background 0.2s;
+  }
+
+  .begin-cta:hover { background: rgba(42,138,150,0.07); }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(46,49,48,0.1);
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 4px;
+    padding: 0 0.5rem;
+  }
+
+  .faq-item:first-child { border-top: 1px solid rgba(46,49,48,0.1); }
+
+  .faq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0.5rem;
+    gap: 2rem;
+    pointer-events: none;
+  }
+
+  .faq-header h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.05rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .faq-arrow {
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(42,138,150,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 300;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+  .faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94), padding 0.3s ease;
+    padding: 0 0.5rem;
+  }
+
+  .faq-item.open .faq-body {
+    max-height: 200px;
+    padding: 0 0.5rem 1.5rem;
+  }
+
+  .faq-body p { font-size: 0.9rem; color: rgba(46,49,48,0.62); margin: 0; line-height: 1.7; }
+
+  .begin-cta-block {
+    margin-top: 2rem;
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    border: 1px solid rgba(46,49,48,0.1);
+    border-radius: 16px;
+    padding: 3.5rem 3rem;
+    text-align: center;
+  }
+
+  .begin-cta-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 2rem;
   }
 
   .snap-container.footer-snap {
@@ -1002,19 +1219,16 @@
 <div class="snap-container">
 <section id="about-me">
   <div class="section-inner wide">
-    <span class="section-descriptor">The physician behind the studio</span>
-    <h2 class="title-display">About Me</h2>
-    <div class="doctor-grid">
+    <div style="display:grid; grid-template-columns: 340px 1fr; gap: 5rem; align-items: center;">
+      <img src="photo.jpg" alt="Dr. Adriaan van der Wart" style="width:100%; height:420px; object-fit:cover; object-position: center top; display:block; border-radius: 8px;" onerror="this.style.background='var(--bg2)';">
       <div>
-        <img src="bio.jpg" alt="Dr. Adriaan van der Wart" class="doctor-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <div class="doctor-photo-placeholder" style="display:none">Photo</div>
-      </div>
-      <div>
+        <span class="section-descriptor">The physician behind the studio</span>
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">About Me</h2>
         <p class="body-intro">Dr. Adriaan van der Wart, MBChB</p>
         <div class="divider"></div>
         <p>I'm a family and emergency physician practising in British Columbia. My medical training was completed in South Africa, and I've worked across emergency, rural, northern, Indigenous, expedition, and end-of-life medicine in Canada for over a decade.</p>
-        <p>In 2008, I joined a forty-day sailing voyage across the Atlantic as ship's doctor for three men attempting an extended fast. They were in genuine crisis when they boarded. By the time we made landfall, they had changed in ways that the medicine I'd been trained in couldn't fully account for. I didn't understand what I was seeing at the time. The work since then has been figuring it out.</p>
-        <p>Along the way I've done my own fasts, sat with silence and with plant medicines under careful guidance, climbed mountains, burned out, and come back. Open Medicine Studio is what I built when I finally understood what I'd been looking at on that boat. It's the offering I've come to believe in — grounded in clinical practice, made possible by the monitoring technology that now allows a physician to be genuinely present at a distance.</p>
+        <p>In 2008, I joined a forty-day sailing voyage across the Atlantic as ship's doctor for three men attempting an extended fast. They were in genuine crisis when they boarded. By the time we made landfall, they had changed in ways that the medicine I'd been trained in couldn't fully account for.</p>
+        <p>Open Medicine Studio is what I built when I finally understood what I'd been looking at on that boat — grounded in clinical practice, made possible by monitoring technology that allows a physician to be genuinely present at a distance.</p>
       </div>
     </div>
   </div>
@@ -1022,50 +1236,105 @@
 </div>
 
 <!-- 12 HOW TO BEGIN -->
+<!-- FAQ -->
 <div class="snap-container">
-<section id="begin" class="gradient">
+<section id="faq">
   <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor on-gradient">An invitation, walked carefully</span>
-        <h2 class="section-title on-gradient">How to Begin</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro on-gradient">The path in is intentionally gradual</p>
-        <div class="divider"></div>
-        <p>I designed the intake process to be careful on both sides. It gives me what I need to understand your situation, and it gives you what you need to decide whether this is the right thing for you right now.</p>
-        <div class="booking-block">
-          <div class="booking-steps">
-            <div class="booking-step">
-              <span class="booking-step-num">01</span>
-              <p>Reach out to Natalie Moore, my assistant, at <a href="mailto:natalie@openmedicinestudio.com">natalie@openmedicinestudio.com</a>. She'll send you a brief eligibility check — about five minutes — and answer your initial questions.</p>
-            </div>
-            <div class="booking-step">
-              <span class="booking-step-num">02</span>
-              <p>If the eligibility check is clear, the next step is a structured medical intake — about twenty-five minutes, completed through the Jane patient portal. I review everything before we meet.</p>
-            </div>
-            <div class="booking-step">
-              <span class="booking-step-num">03</span>
-              <p>We meet one-on-one. I walk through your intake, describe the likely physiological routing of your fast, and we talk through the specific support I'll provide during the week. The consultation fee is $100 CAD, invoiced afterward. If you go ahead with the fast, that amount comes off your final invoice.</p>
-            </div>
-            <div class="booking-step">
-              <span class="booking-step-num">04</span>
-              <p>If we both feel the fast is the right next step, you book. A deposit is required to hold your place. If the fast ends early — by your choice in consultation with me, or by my clinical recommendation — partial reimbursement is available, calculated against the days completed.</p>
-            </div>
-          </div>
-          <div class="price-line">
-            <span class="price-num">$2,500 CAD</span>
-            <span class="price-label">Total cost of the supervised fast</span>
-          </div>
+    <span class="section-descriptor">Common questions</span>
+    <h2 class="section-title" style="margin-bottom: 2.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <h4>What should I expect during the fast?</h4>
+          <span class="faq-arrow">+</span>
         </div>
-        <p style="margin-top: 2rem; font-size: 0.86rem; color: var(--muted);">From first contact to the first day of fasting is typically four to eight weeks, depending on how quickly the intake is completed and how the consultation goes. I work with a small number of participants at a time — the work requires that.</p>
-        <a href="mailto:natalie@openmedicinestudio.com" class="cta-button">Begin — natalie@openmedicinestudio.com</a>
-        <p style="margin-top: 1.5rem; font-size: 0.82rem; color: var(--muted);">General inquiries: <a href="mailto:info@openmedicinestudio.com" style="color:var(--accent); text-decoration:none;">info@openmedicinestudio.com</a></p>
+        <div class="faq-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <h4>How much water should I drink?</h4>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <h4>What if something goes wrong?</h4>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <h4>Will I lose weight?</h4>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <h4>Is this covered by insurance?</h4>
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 </div>
+
+<div class="snap-container">
+<section id="begin" class="gradient">
+  <div class="begin-inner">
+    <span class="section-descriptor on-gradient" style="text-align:center; display:block; margin-bottom:0.75rem;">An invitation, walked carefully</span>
+    <h2 class="section-title on-gradient" style="text-align:center; font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3rem;">How to Begin</h2>
+    <div class="begin-glass">
+      <div class="begin-steps">
+        <div class="begin-step">
+          <span class="begin-num">01</span>
+          <p>Reach out to Natalie Moore, my assistant, at <a href="mailto:natalie@openmedicinestudio.com">natalie@openmedicinestudio.com</a>. She'll send a brief eligibility check — about five minutes — and answer your initial questions.</p>
+        </div>
+        <div class="begin-step">
+          <span class="begin-num">02</span>
+          <p>If eligibility is clear, the next step is a structured medical intake — about twenty-five minutes, completed through the Jane patient portal. I review everything before we meet.</p>
+        </div>
+        <div class="begin-step">
+          <span class="begin-num">03</span>
+          <p>We meet one-on-one. I walk through your intake, describe the likely physiological routing of your fast, and we agree on the support I'll provide. The consultation fee is $100 CAD — deducted from your final invoice if you proceed.</p>
+        </div>
+        <div class="begin-step">
+          <span class="begin-num">04</span>
+          <p>If we both feel the fast is the right step, you book. A deposit is required. If the fast ends early, partial reimbursement is available, calculated against the days completed.</p>
+        </div>
+      </div>
+      <div class="begin-price">
+        <div class="begin-price-amount">$2,500 CAD</div>
+        <div class="begin-price-label">Total cost of the supervised fast</div>
+      </div>
+    </div>
+    <div class="begin-cta-block">
+      <h3 class="begin-cta-title">Steer your life in a new direction</h3>
+      <a href="mailto:natalie@openmedicinestudio.com" class="begin-cta">Begin Today</a>
+      <div style="display:flex; gap:3rem; justify-content:center; margin-top:1.75rem; font-size:0.78rem; color:rgba(46,49,48,0.45);">
+        <span>Assistant: <a href="mailto:natalie@openmedicinestudio.com" style="color:var(--accent); text-decoration:none;">natalie@openmedicinestudio.com</a></span>
+        <span>General inquiries: <a href="mailto:info@openmedicinestudio.com" style="color:var(--accent); text-decoration:none;">info@openmedicinestudio.com</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
 
 <div class="snap-container footer-snap">
 <footer>
@@ -1076,24 +1345,30 @@
     </svg>
     <span style="font-family:var(--serif); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted);">Open Medicine Studio</span>
   </div>
-  <div class="footer-links">
-    <a href="mailto:info@openmedicinestudio.com">Contact</a>
-    <a href="#begin">Begin</a>
-  </div>
   <p class="footer-copy">© 2025 Open Medicine Studio</p>
 </footer>
 </div>
 
 <script>
+function toggleFaq(item) {
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
 function toggleHow(card) {
   card.classList.toggle('open');
 }
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible');
+    }
   });
-}, { threshold: 0.06 });
+}, { threshold: 0.15 });
 
 document.querySelectorAll('section, footer').forEach(el => revealObserver.observe(el));
 
