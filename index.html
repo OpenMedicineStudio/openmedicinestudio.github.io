@@ -844,17 +844,16 @@
     align-items: center;
     justify-content: space-between;
     border: none;
-    border-top: 1px solid rgba(46,49,48,0.12);
     border-radius: 0;
-    background: rgba(247,244,240,0.35);
-    backdrop-filter: blur(32px) saturate(1.4);
-    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    background: #0a555f;
     width: 100%;
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
   footer.visible { opacity: 1; transform: none; }
+  footer .footer-copy { color: rgba(220,242,245,0.5); }
+  footer span { color: rgba(220,242,245,0.7) !important; }
 
   .footer-links { display: flex; gap: 2.5rem; }
   .footer-links a {
@@ -909,51 +908,9 @@
 <div class="snap-container hero-snap">
 <section id="hero" class="gradient">
   <div class="hero-content">
-    <span class="section-descriptor on-gradient">A medically supervised clinical service</span>
     <h1 class="hero-title">Access the<br>benefits of<br>water fasting.</h1>
     <div class="divider" style="margin-top: 3.5rem;"></div>
-    <p class="hero-sub">Five days. At home. Under continuous physician oversight and research-grade monitoring. Conducted by a physician who has spent years understanding what this process can do.</p>
-  </div>
-</section>
-</div>
-
-<!-- 01b THE STORY -->
-<div class="snap-container">
-<section id="the-story">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">The moment that started everything</span>
-        <h2 class="section-title">Forty Days on the Atlantic</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">Why I built this, and where it began</p>
-        <div class="divider"></div>
-        <p>In 2008 I was the ship's doctor on a forty-day Atlantic crossing. Three men in crisis boarded that boat. By the time we made landfall, something had shifted in each of them — something I couldn't account for with the medicine I'd been trained in.</p>
-        <p>I've spent the years since trying to understand what I witnessed. Open Medicine Studio is what I built when I finally did — a clinical service designed to create those conditions carefully, with good data underneath them, and a physician present throughout.</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- 02 ABOUT THE STUDIO -->
-<div class="snap-container">
-<section id="about">
-  <div class="section-inner wide">
-    <div class="split-layout">
-      <div class="split-left">
-        <span class="section-descriptor">What I built, and why</span>
-        <h2 class="section-title">About the Studio</h2>
-      </div>
-      <div class="split-body">
-        <p class="body-intro">A working studio, built in clinical register</p>
-        <div class="divider"></div>
-        <p>I built Open Medicine Studio because I needed a place where this work could be done carefully and taken seriously — not flattened into wellness, and not pushed into a clinical category that didn't quite fit.</p>
-        <p>The work centres on one thing: creating the conditions under which a human nervous system can briefly soften its defences, expand its range, and return to ordinary life with more capacity than it had before. The way I do that is through a medically supervised water fast, conducted at home, with continuous remote monitoring and daily physician oversight from me personally.</p>
-        <p>The supervision is close. The monitoring is research-grade. And the pace of the work is set by what your body is actually doing — not by a schedule.</p>
-      </div>
-    </div>
+    <p class="hero-sub">Medically supervised by a physician, from the safety and quiet of your own home.</p>
   </div>
 </section>
 </div>
@@ -964,14 +921,15 @@
   <div class="section-inner wide">
     <div class="split-layout">
       <div class="split-left">
-        <span class="section-descriptor">A clinically established intervention</span>
-        <h2 class="section-title">Water Fasting</h2>
+        <span class="section-descriptor">Water fasting</span>
+        <h2 class="section-title">What is it, Why do it?</h2>
       </div>
       <div class="split-body">
-        <p class="body-intro">Decades of medical research, taken seriously</p>
+        <p class="body-intro">A clinically established intervention with a simple premise</p>
         <div class="divider"></div>
         <p>Therapeutic fasting under medical supervision has been studied since the 1960s. Its effects on metabolism, autonomic regulation, inflammation, and the central nervous system are well-documented in the published literature. This is an established area of medicine, not a fringe practice.</p>
-        <p>What I bring to it is continuous remote monitoring at a resolution that hasn't previously been available in home-based fasting — paired with daily physician review throughout the week. The physiological basis of fasting is well understood. What I've added is a way to watch it unfold in real time, and to be genuinely present if something needs attention.</p>
+        <p>The premise is straightforward: every living organism has an innate capacity for self-repair. What gets in the way is the continuous demand we place on our systems — digestion, detoxification, stress response, metabolic regulation — running in parallel, all day, every day. When food is removed, the body redirects that energy toward deeper processes: cellular repair, immune regulation, metabolic recalibration. The system, briefly freed from its ordinary workload, turns its attention inward.</p>
+        <p>This is not a new idea. Fasting appears in the oldest medical traditions on earth. What's new is our ability to watch it happen — in real time, through continuous monitoring, with a physician reading the data as it arrives.</p>
       </div>
     </div>
   </div>
@@ -988,9 +946,9 @@
         <h2 class="section-title">Physical Benefits</h2>
       </div>
       <div class="split-body">
-        <p class="body-intro">Clinical outcomes with real evidence behind them</p>
+        <p class="body-intro">Documented outcomes, tracked in real time</p>
         <div class="divider"></div>
-        <p>Across five days of supervised fasting, the body moves through a documented sequence of physiological transitions. Insulin falls. Stored glycogen depletes. The body shifts from glucose to ketone metabolism. Cellular autophagy accelerates. Inflammatory markers decrease.</p>
+        <p>When digestion stops, the body's repair systems accelerate. Across five days of supervised fasting, the body moves through a documented sequence of physiological transitions — each one measurable, each one watched.</p>
         <div class="benefit-cols">
           <div class="benefit-item">
             <h4>Blood pressure</h4>
@@ -1006,7 +964,7 @@
           </div>
           <div class="benefit-item">
             <h4>Cellular autophagy</h4>
-            <p>Accelerated cellular renewal as the metabolic shift into ketosis creates conditions for deeper cellular housekeeping.</p>
+            <p>Freed from its digestive workload, the body accelerates cellular cleanup — clearing debris and renewing tissue at a rate not possible during normal eating.</p>
           </div>
         </div>
         <p style="margin-top: 1.75rem;">I follow all of these through your continuous data stream throughout the week.</p>
@@ -1235,7 +1193,28 @@
 </section>
 </div>
 
-<!-- 12 HOW TO BEGIN -->
+<!-- 02 ABOUT THE STUDIO -->
+<div class="snap-container">
+<section id="about">
+  <div class="section-inner wide">
+    <div class="split-layout">
+      <div class="split-left">
+        <span class="section-descriptor">A new way of practising medicine</span>
+        <h2 class="section-title">About the Studio</h2>
+      </div>
+      <div class="split-body">
+        <p class="body-intro">Built because the work needed a proper home</p>
+        <div class="divider"></div>
+        <p>I built Open Medicine Studio because I needed a place where this work could be done carefully and taken seriously — not flattened into wellness, and not pushed into a clinical category that didn't quite fit.</p>
+        <p>What I work with is one thing: the conditions under which a human nervous system can briefly soften its defences, expand its range, and return to ordinary life with more capacity than it had before. The intervention is a medically supervised water fast. But what makes this different from anything else available is the way I watch it.</p>
+        <p>Most clinical medicine happens in a room. A patient arrives, describes what they've been experiencing, and leaves with a plan. My window into what's happening in your body is different — it's continuous, research-grade, and real time. Your heart rate variability, glucose, ketones, and electrodermal activity stream to me throughout the week. I'm not waiting to be called. I'm already reading.</p>
+        <p>That's the edge I've built. Not just the fast — but the quality of oversight wrapped around it. Medicine practised at a distance, at depth, and in real time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
 <!-- FAQ -->
 <div class="snap-container">
 <section id="faq">
@@ -1340,10 +1319,10 @@
 <footer>
   <div style="display:flex; align-items:center; gap:0.75rem;">
     <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-      <circle cx="16" cy="16" r="14" stroke="#2a8a96" stroke-width="1"/>
-      <circle cx="16" cy="16" r="2.2" fill="#2a8a96"/>
+      <circle cx="16" cy="16" r="14" stroke="rgba(220,242,245,0.7)" stroke-width="1"/>
+      <circle cx="16" cy="16" r="2.2" fill="rgba(220,242,245,0.7)"/>
     </svg>
-    <span style="font-family:var(--serif); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted);">Open Medicine Studio</span>
+    <span style="font-family:var(--serif); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(220,242,245,0.7);">Open Medicine Studio</span>
   </div>
   <p class="footer-copy">© 2025 Open Medicine Studio</p>
 </footer>
